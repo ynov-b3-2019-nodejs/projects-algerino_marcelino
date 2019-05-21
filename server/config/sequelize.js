@@ -4,7 +4,7 @@ const config = require('./config');
 
 // Option 1: Passing parameters separately
 const sequelize = new Sequelize(config.sequelize.db, config.sequelize.usr, '', {
-  host: 'localhost',
+  host: 'louis-charavner.fr',
   dialect: 'mysql',
   define: {
     charset: 'utf8',
