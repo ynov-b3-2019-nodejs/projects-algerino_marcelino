@@ -1,0 +1,9 @@
+{
+  "ITEMS_PER_PAGE_LABEL": "Nombre d'element affichés.",
+  "NEXT_PAGE_LABEL": "Page suivante",
+  "PREVIOUS_PAGE_LABEL": "Page précédente",
+  "FIRST_PAGE_LABEL": "Première Page",
+  "LAST_PAGE_LABEL": "Dernière Page",
+  "RANGE_PAGE_LABEL_1": "0 a {{length}}",
+  "RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}"
+}
