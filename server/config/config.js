@@ -20,10 +20,14 @@ const envVarsSchema = Joi.object({
     .description('JWT Secret required to sign'),
   MONGO_HOST: Joi.string().required()
     .description('Mongo DB host url'),
+  SEQ_URL: Joi.string().required()
+    .description('Mysql url'),
   SEQ_USR: Joi.string().required()
     .description('Mysql user'),
   SEQ_DB: Joi.string().required()
     .description('Mysql DB'),
+  SEQ_PWD: Joi.string()
+    .description('Mysql PWD'),
   MONGO_PORT: Joi.number()
     .default(27017)
 }).unknown()
@@ -46,7 +50,9 @@ const config = {
   },
   sequelize: {
     usr: envVars.SEQ_USR,
-    db: envVars.SEQ_DB
+    db: envVars.SEQ_DB,
+    pwd: envVars.SEQ_PWD,
+    url: envVars.SEQ_URL
   }
 };
 
