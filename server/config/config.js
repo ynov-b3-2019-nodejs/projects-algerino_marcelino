@@ -10,16 +10,8 @@ const envVarsSchema = Joi.object({
     .default('development'),
   SERVER_PORT: Joi.number()
     .default(4040),
-  MONGOOSE_DEBUG: Joi.boolean()
-    .when('NODE_ENV', {
-      is: Joi.string().equal('development'),
-      then: Joi.boolean().default(true),
-      otherwise: Joi.boolean().default(false)
-    }),
   JWT_SECRET: Joi.string().required()
     .description('JWT Secret required to sign'),
-  MONGO_HOST: Joi.string().required()
-    .description('Mongo DB host url'),
   SEQ_URL: Joi.string().required()
     .description('Mysql url'),
   SEQ_USR: Joi.string().required()
@@ -27,9 +19,7 @@ const envVarsSchema = Joi.object({
   SEQ_DB: Joi.string().required()
     .description('Mysql DB'),
   SEQ_PWD: Joi.string()
-    .description('Mysql PWD'),
-  MONGO_PORT: Joi.number()
-    .default(27017)
+    .description('Mysql PWD')
 }).unknown()
   .required();
 
@@ -41,13 +31,8 @@ if (error) {
 const config = {
   env: envVars.NODE_ENV,
   port: envVars.SERVER_PORT,
-  mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
   frontend: envVars.MEAN_FRONTEND || 'angular',
-  mongo: {
-    host: envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT
-  },
   sequelize: {
     usr: envVars.SEQ_USR,
     db: envVars.SEQ_DB,
