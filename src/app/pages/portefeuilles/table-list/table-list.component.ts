@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PortefeuilleService} from '../../../services/portefeuille.service';
 import {Portefeuille} from '../../../models/portefeuille';
-import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource, MatPaginator} from '@angular/material';
 import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class TableListComponent implements OnInit {
 
   isDataLoaded = false;
 
-  @ViewChild(MatPaginatorIntl) paginator: MatPaginatorIntl;
+  @ViewChild(MatPaginatorIntl) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
