@@ -1,0 +1,24 @@
+<div *ngIf="currentPortefeuille">
+  <h2 mat-dialog-title>Édition de portefeuille</h2>
+  <mat-dialog-content>
+    <form [formGroup]="portefeuilleForm" (submit)="handleEdit()">
+      <mat-form-field>
+        <input formControlName="nom" id="nom" matInput placeholder="Nom" required>
+        <mat-error *ngIf="!portefeuilleForm.controls.nom.valid">Le nom est requis</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Statut : </mat-label>
+        <mat-select formControlName="statutId" id="statutId">
+          <mat-option *ngFor="let statut of statuts" [value]="statut.id">
+            {{statut.nom}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!portefeuilleForm.controls.statutId.valid">Le statut est requis</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button (click)="handleEdit()">Install</button>
+    </mat-dialog-actions>
+</div>

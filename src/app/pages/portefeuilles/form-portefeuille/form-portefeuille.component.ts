@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {TableListComponent} from '../table-list/table-list.component';
 import {PortefeuilleService} from '../../../services/portefeuille.service';
 import {Portefeuille} from '../../../models/portefeuille';
@@ -14,7 +14,7 @@ import {Statut} from '../../../models/statut';
 })
 export class FormPortefeuilleComponent implements OnInit {
 
-  userForm: any;
+  userForm: FormGroup;
 
   statuts: [Statut];
 
@@ -39,7 +39,8 @@ export class FormPortefeuilleComponent implements OnInit {
   saveUser() {
     if (this.userForm.dirty && this.userForm.valid) {
       console.log(this.userForm.controls.statutId);
-      this.portefeuilleService.create(new Portefeuille(this.userForm.controls.nom.value, this.userForm.controls.statutId.value)).subscribe(data => {
+      this.portefeuilleService.create(
+        new Portefeuille(this.userForm.controls.nom.value, this.userForm.controls.statutId.value)).subscribe(data => {
         this.dialogRef.close(data);
       });
     }

@@ -3,6 +3,7 @@ import {PortefeuilleService} from '../../../services/portefeuille.service';
 import {Portefeuille} from '../../../models/portefeuille';
 import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource, MatPaginator} from '@angular/material';
 import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.component';
+import { EditPortefeuilleComponent } from '../edit-portefeuille/edit-portefeuille.component';
 
 @Component({
   selector: 'app-portefeuille-table-list',
@@ -10,7 +11,7 @@ import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.
   styleUrls: ['./table-list.component.scss']
 })
 export class TableListComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut'];
+  displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut', 'action'];
   portefeuille: MatTableDataSource<Portefeuille>;
 
   isDataLoaded = false;
@@ -44,8 +45,20 @@ export class TableListComponent implements OnInit {
     const dialogRef = this.dialog.open(FormPortefeuilleComponent);
 
     dialogRef.afterClosed().subscribe((result: Portefeuille) => {
-      this.snackBar.open('Portefeuille ' + result.nom + ' créé !', 'Effacer', {duration: 5000});
-      this.loadData();
+      if (result) {
+        this.snackBar.open(`Le portefeuille ${result.nom} a été créer avec succès !`, 'Ok', {duration: 3000});
+        this.loadData();
+      }
+    });
+  }
+
+  editDialog(targetPortefeuille: Portefeuille) {
+    const dialogRef = this.dialog.open(EditPortefeuilleComponent);
+
+    dialogRef.componentInstance.getCurrentPortefeuille(targetPortefeuille);
+
+    dialogRef.afterClosed().subscribe((result: Portefeuille) => {
+      console.log('result ==>', result);
     });
   }
 

@@ -18,6 +18,10 @@ export class PortefeuilleService {
   }
 
   create(portefeuille: Portefeuille) {
-    return this.http.post(environment.url + this.entityUrl, portefeuille);
+    return this.http.post<Portefeuille>(environment.url + this.entityUrl, portefeuille);
+  }
+
+  update(portefeuille: Portefeuille) {
+    return this.http.put<Portefeuille>(environment.url + this.entityUrl + '/' + 1, portefeuille);
   }
 }
