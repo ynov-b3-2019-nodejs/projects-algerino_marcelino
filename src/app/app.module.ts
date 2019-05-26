@@ -21,6 +21,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';
+import { FormProjetComponent } from './pages/projet/form-projet/form-projet.component';
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -32,6 +33,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     TableListComponent,
     FormPortefeuilleComponent,
     ProjetTableListComponent,
+    FormProjetComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: 'fr'
     }
   ],
-  entryComponents: [FormPortefeuilleComponent],
+  entryComponents: [FormPortefeuilleComponent, FormProjetComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {

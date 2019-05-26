@@ -9,7 +9,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "debug" : "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,TEST\" \"nodemon server\" \"ng serve\""
   },
   "private": true,
   "dependencies": {

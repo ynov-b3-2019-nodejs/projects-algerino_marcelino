@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { HomeComponent } from '../home/home.component';
+import { ProjetTableListComponent } from '../pages/projet/projet-table-list/projet-table-list.component';
 
 const routes: Routes = [{
   path: '',
   component: HomeComponent
+}, {
+  path: 'projets',
+  component: ProjetTableListComponent
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
@@ -21,4 +25,4 @@ const routes: Routes = [{
   declarations: []
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
