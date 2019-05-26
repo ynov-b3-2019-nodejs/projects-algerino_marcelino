@@ -6,9 +6,9 @@ const EntityController = require('../controllers/projet.controller');
 const router = express.Router();
 module.exports = router;
 
-router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(list));
+router.get('/id', passport.authenticate('jwt', { session: false }), asyncHandler(list));
 async function list(req, res) {
-  res.json(await EntityController.list());
+  res.json(await EntityController.list(req.params.id));
 }
 
 router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));

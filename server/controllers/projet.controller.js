@@ -27,6 +27,6 @@ async function get(id) {
   return await Entity.findOne({ where: { id: id }, include: [Portefeuille, Statut]});
 }
 
-async function list() {
-  return await Entity.findAll({ include: [Portefeuille, Statut]});
+async function list(id) {
+  return await Entity.findAll({ where: { portefeuilleId: id }, include: [Portefeuille, Statut]});
 }
