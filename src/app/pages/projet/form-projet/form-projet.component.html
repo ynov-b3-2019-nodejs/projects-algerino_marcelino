@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Install Angular</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="projetForm" (submit)="saveProjet()">
+  <form [formGroup]="projetForm" (submit)="saveDataProjet()">
     <mat-form-field>
       <input formControlName="nom" id="nom" matInput placeholder="Nom" required>
       <mat-error *ngIf="!projetForm.controls.nom.valid">Le nom est requis</mat-error>
@@ -17,7 +17,7 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)="saveProjet()">Install</button>
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button (click)="saveDataProjet()">Envoyer</button>
 </mat-dialog-actions>
 

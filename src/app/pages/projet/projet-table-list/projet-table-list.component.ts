@@ -40,8 +40,11 @@ export class ProjetTableListComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(FormProjetComponent, { data: { id: this.portefeuilleId, action: "create"}});
+  openDialog(projet: Projet) {
+    const dialogRef = this.dialog.open(FormProjetComponent);
+
+    dialogRef.componentInstance.onDataProjet(this.portefeuilleId, projet)
+
 
     dialogRef.afterClosed().subscribe((result: Projet) => {
       if(result){
@@ -51,18 +54,8 @@ export class ProjetTableListComponent implements OnInit {
     });
   }
 
-  editDialog(projet: Projet) {
-
-    const dialogRef = this.dialog.open(FormProjetComponent, { data: { projet, action: "edit"}});
-
-    dialogRef.afterClosed().subscribe((result: Projet) => {
-      if (result) {
-        this.snackBar.open('le projet ' + result.nom + ' à bien étais édité !', 'Effacer', { duration: 5000 });
-        this.loadData();
-      }
-    });
+  deleteProjet(projetId: number) {
+    this.projetService.delete(projetId).subscribe((data) => { this.loadData(); })
   }
-
-  deleteProjet(projetId: number) {}
 
 }
