@@ -42,8 +42,13 @@ export class EditPortefeuilleComponent implements OnInit {
   handleEdit() {
     if (this.portefeuilleForm.dirty && this.portefeuilleForm.valid) {
 
-      this.portefeuilleService.update(
-        new Portefeuille(this.portefeuilleForm.controls.nom.value, this.portefeuilleForm.controls.statutId.value)).subscribe((data) => {
+      this.portefeuilleService
+        .update(
+        new Portefeuille(
+          this.portefeuilleForm.controls.nom.value,
+          this.portefeuilleForm.controls.statutId.value,
+          this.currentPortefeuille.id))
+        .subscribe((data) => {
         this.dialogRef.close(data);
       });
     }

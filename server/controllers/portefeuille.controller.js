@@ -15,15 +15,15 @@ async function insert(entity) {
 }
 
 async function update(entity, id) {
-  return await Entity.update(entity, {where: {_id: id}});
+  return await Entity.update(entity, {where: {id: id}});
 }
 
 async function destroy(id) {
-  return await Entity.destroy({where: {_id: id}});
+  return await Entity.destroy({where: {id: id}});
 }
 
 async function get(id) {
-  return await Entity.findOne({where: {_id: id}});
+  return await Entity.findOne({where: {id: id}});
 }
 
 async function list() {

@@ -47,7 +47,6 @@ export class TableListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Portefeuille) => {
       if (result) {
         this.snackBar.open(`Le portefeuille ${result.nom} a été créer avec succès !`, 'Ok', {duration: 3000});
-        this.loadData();
       }
     });
   }
@@ -58,7 +57,7 @@ export class TableListComponent implements OnInit {
     dialogRef.componentInstance.getCurrentPortefeuille(targetPortefeuille);
 
     dialogRef.afterClosed().subscribe((result: Portefeuille) => {
-      console.log('result ==>', result);
+      this.loadData();
     });
   }
 

@@ -8,8 +8,18 @@ export class Portefeuille {
   updatedAt: Date;
   Statut: Statut;
 
-  constructor(nom: string, statutId: number) {
+  constructor(nom: string, statutId: number, id?: number, createdAt?: Date, updatedAt?: Date) {
     this.nom = nom;
     this.StatutId = statutId;
+
+    if (id) {
+      this.id = id;
+    }
+    if (createdAt) {
+      this.createdAt = createdAt;
+    }
+    if (updatedAt) {
+      this.updatedAt = updatedAt;
+    }
   }
 }

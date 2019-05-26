@@ -38,7 +38,6 @@ export class FormPortefeuilleComponent implements OnInit {
 
   saveUser() {
     if (this.userForm.dirty && this.userForm.valid) {
-      console.log(this.userForm.controls.statutId);
       this.portefeuilleService.create(
         new Portefeuille(this.userForm.controls.nom.value, this.userForm.controls.statutId.value)).subscribe(data => {
         this.dialogRef.close(data);
