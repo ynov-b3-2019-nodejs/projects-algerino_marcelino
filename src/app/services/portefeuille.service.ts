@@ -24,4 +24,8 @@ export class PortefeuilleService {
   update(portefeuille: Portefeuille) {
     return this.http.put<Portefeuille>(environment.url + this.entityUrl + '/' + portefeuille.id, portefeuille);
   }
+
+  delete(portefeuilleId: number) {
+    return this.http.delete<Portefeuille>(environment.url + this.entityUrl + '/' + portefeuilleId);
+  }
 }

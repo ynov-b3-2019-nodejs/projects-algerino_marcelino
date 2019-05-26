@@ -61,4 +61,10 @@ export class TableListComponent implements OnInit {
     });
   }
 
+  deleteLine(portefeuilleId: number) {
+    this.portefeuilleService.delete(portefeuilleId).subscribe(
+      (data) => { this.loadData(); }
+    );
+  }
+
 }
