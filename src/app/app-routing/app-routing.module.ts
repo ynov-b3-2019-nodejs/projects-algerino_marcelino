@@ -1,3 +1,5 @@
+import { LivrableDetailComponent } from './../pages/livrable/livrable-detail/livrable-detail.component';
+import { LivrableTableListComponent } from './../pages/livrable/livrable-table-list/livrable-table-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
@@ -10,6 +12,14 @@ const routes: Routes = [{
 }, {
   path: 'projets',
   component: ProjetTableListComponent
+},
+{
+  path: 'livrables/:id',
+  component: LivrableTableListComponent,
+  children: [{
+    path: ':id',
+    component: LivrableDetailComponent
+  }]
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
