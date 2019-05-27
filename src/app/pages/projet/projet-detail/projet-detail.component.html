@@ -1,5 +1,23 @@
 <ng-container *ngIf="projet">
-<mat-card>{{projet.nom}}</mat-card>
+<mat-card>
+  <button mat-icon-button matTooltip="Retour" matTooltipPosition="after" [routerLink]="[ '/projets']" style="margin-bottom: 1.1rem;"><mat-icon aria-label="Retour">reply</mat-icon></button>
+  <mat-card-title>Projet Actuelle: {{projet.nom}}</mat-card-title>
+  <mat-card-subtitle style="color: rgba(0,0,0,1.54) !important;">Portefeuille Actuelle: {{projet.Portefeuille.nom}}</mat-card-subtitle>
+  <mat-card-content>
+    <mat-divider [inset]="true"></mat-divider>
+    <p>
+      Créé Le : {{projet.createdAt | date:'dd/MM/yyyy'}}
+    </p>
+    <mat-divider [inset]="true"></mat-divider>
+    <p>
+      Modifié Le : {{projet.updatedAt | date:'dd/MM/yyyy'}}
+    </p>
+    <mat-divider [inset]="true"></mat-divider>
+    <p>
+      Statut du projet : {{projet.Statut.nom}}
+    </p>
+  </mat-card-content>
+</mat-card>
 <div style="margin:1rem"></div>
 <app-livrable-table-list [projetId]="projet.id"></app-livrable-table-list>
 </ng-container>

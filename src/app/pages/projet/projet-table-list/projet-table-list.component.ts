@@ -29,12 +29,6 @@ export class ProjetTableListComponent implements OnInit {
   loadData(){
     this.isDataLoaded = false;
     this.projetService.list(this.portefeuilleId).subscribe((datas: Array<Projet>) => {
-
-      for(const data of datas){
-        data.createdAt = new Date(Date.parse(Date()));
-        data.updatedAt = new Date(Date.parse(Date()));
-      }
-
       this.projet = new MatTableDataSource<Projet>(datas);
       this.isDataLoaded = true;
     });

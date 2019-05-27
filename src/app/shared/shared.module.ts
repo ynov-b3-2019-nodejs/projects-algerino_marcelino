@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
+
+
 import {
   MatToolbarModule,
   MatMenuModule,
@@ -20,7 +22,7 @@ import {
   MatTreeModule,
   MatProgressBarModule,
   MatFormFieldModule,
-  MatSelectModule, MatPaginatorIntl,
+  MatSelectModule, MatPaginatorIntl, MatNativeDateModule, MatDatepickerModule
 } from '@angular/material';
 import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate/core';
 import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
@@ -48,6 +50,8 @@ import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
     MatFormFieldModule,
     MatSelectModule,
     FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatToolbarModule,
@@ -72,6 +76,8 @@ import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
     FlexLayoutModule,
     CommonModule,
     TranslateModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [],
   providers: [

@@ -22,10 +22,7 @@ export class ProjetDetailComponent implements OnInit {
       if (params['id']) {
         this.projetService.detail(params['id']).subscribe((data: Projet) => {
 
-          data.createdAt = new Date(Date.parse(Date()));
-          data.updatedAt = new Date(Date.parse(Date()));
-
-          this.projet = data
+         this.projet = data
 
           this.isDataLoaded = true;
         });

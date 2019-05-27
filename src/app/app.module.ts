@@ -27,6 +27,12 @@ import { LivrableTableListComponent } from './pages/livrable/livrable-table-list
 import { FormLivrableComponent } from './pages/livrable/form-livrable/form-livrable.component';
 import { LivrableDetailComponent } from './pages/livrable/livrable-detail/livrable-detail.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
+
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
@@ -75,7 +81,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: 'fr'
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, FormProjetComponent],
+  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {

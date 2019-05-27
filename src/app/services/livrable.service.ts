@@ -62,7 +62,7 @@ export class LivrableService {
   * ```
   */
   edit(livrable: Livrable) {
-    return this.http.patch(environment.url + this.entityUrl + "/" + livrable.id, livrable);
+    return this.http.patch(environment.url + this.entityUrl , livrable);
   }
 
   /**

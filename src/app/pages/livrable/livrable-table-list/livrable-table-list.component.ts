@@ -28,18 +28,10 @@ export class LivrableTableListComponent implements OnInit {
   loadData() {
     this.isDataLoaded = false;
     this.livrableService.list(this.projetId).subscribe((datas: Array<Livrable>) => {
-
-          for (const data of datas) {
-            data.dateprevu = new Date(Date.parse(Date()));
-            data.datefin = new Date(Date.parse(Date()));
-            data.createdAt = new Date(Date.parse(Date()));
-            data.updatedAt = new Date(Date.parse(Date()));
-          }
-
-          this.livrable = new MatTableDataSource<Livrable>(datas);
-          this.isDataLoaded = true;
-        });
-      }
+      this.livrable = new MatTableDataSource<Livrable>(datas);
+      this.isDataLoaded = true;
+    });
+  }
 
   openDialog(livrable: Livrable) {
     const dialogRef = this.dialog.open(FormLivrableComponent);

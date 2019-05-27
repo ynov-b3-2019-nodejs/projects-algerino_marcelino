@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 // MODEL
 import { Statut } from '../../../models/statut';
 // COMPONENT
@@ -13,7 +15,13 @@ import { Livrable } from '../../../models/livrable';
 @Component({
   selector: 'app-form-livrable',
   templateUrl: './form-livrable.component.html',
-  styleUrls: ['./form-livrable.component.scss']
+  styleUrls: ['./form-livrable.component.scss'],
+  providers: [
+    DatePipe,
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+  ],
 })
 export class FormLivrableComponent implements OnInit {
 
@@ -25,6 +33,7 @@ export class FormLivrableComponent implements OnInit {
     private livrableService: LivrableService,
     private statutService: StatutService,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
     private dialogRef: MatDialogRef<LivrableTableListComponent>) { }
 
   ngOnInit() {
@@ -64,6 +73,16 @@ export class FormLivrableComponent implements OnInit {
   saveDataLivrable() {
 
     if (this.livrableForm.dirty && this.livrableForm.valid) {
+
+
+
+      const datePrevu = this.datePipe.transform(this.livrableForm.controls.dateprevu.value, "yyyy/MM/dd", "fr-FR");
+      const dateFin = this.datePipe.transform(this.livrableForm.controls.datefin.value, "yyyy/MM/dd", "fr-FR");
+
+      this.livrableForm.patchValue({
+        dateprevu: datePrevu,
+        datefin: dateFin,
+      })
 
       if (this.action == 'create') {
         this.livrableService.create(

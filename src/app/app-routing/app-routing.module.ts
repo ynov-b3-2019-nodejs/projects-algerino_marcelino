@@ -14,7 +14,7 @@ const routes: Routes = [{
   path: 'projets',
   component: ProjetTableListComponent,
 }, {
-    path: 'projets/:id',
+  path: 'projets/:id',
   component: ProjetDetailComponent
 },
 {
