@@ -1,3 +1,35 @@
-<p>
-  livrable-detail works!
-</p>
+<ng-container *ngIf="livrable">
+  <mat-card>
+    <button mat-icon-button matTooltip="Retour" matTooltipPosition="after"
+      [routerLink]="[ '/projets',livrable.Projet.id ]" style="margin-bottom: 1.1rem;">
+      <mat-icon aria-label="Retour">reply</mat-icon>
+    </button>
+    <mat-card-title>livrable Actuelle: {{livrable.nom}}</mat-card-title>
+    <mat-card-subtitle style="color: rgba(0,0,0,1.54) !important;">Projet Actuelle: {{livrable.Projet.nom}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-divider [inset]="true"></mat-divider>
+      <p>
+        Date de Début : {{livrable.dateprevu | date:'dd/MM/yyyy'}}
+      </p>
+      <mat-divider [inset]="true"></mat-divider>
+      <p>
+        Date de Fin : {{livrable.datefin | date:'dd/MM/yyyy'}}
+      </p>
+      <mat-divider [inset]="true"></mat-divider>
+      <p>
+        Créé Le : {{livrable.createdAt | date:'dd/MM/yyyy'}}
+      </p>
+      <mat-divider [inset]="true"></mat-divider>
+      <p>
+        Modifié Le : {{livrable.updatedAt | date:'dd/MM/yyyy'}}
+      </p>
+      <mat-divider [inset]="true"></mat-divider>
+      <p>
+        Statut du livrable : {{livrable.Statut.nom}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <!-- <div style="margin:1rem"></div>
+  <app-livrable-table-list [livrableId]="livrable.id"></app-livrable-table-list> -->
+</ng-container>

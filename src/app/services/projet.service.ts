@@ -52,7 +52,7 @@ export class ProjetService {
   * ```
   */
   edit(projet: Projet) {
-    return this.http.patch(environment.url + this.entityUrl + "/" + projet.id, projet);
+    return this.http.patch(environment.url + this.entityUrl, projet);
   }
 
   /**

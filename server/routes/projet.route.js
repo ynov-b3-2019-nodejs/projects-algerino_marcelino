@@ -16,9 +16,9 @@ async function get(req, res) {
   res.json(await EntityController.get(req.params.portefeuilleId));
 }
 
-router.patch('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));
+router.patch('/', passport.authenticate('jwt', { session: false }), asyncHandler(update));
 async function update(req, res) {
-  res.json(await EntityController.update(req.params.id, req.body));
+  res.json(await EntityController.update(req.body));
 }
 
 router.post('/', passport.authenticate('jwt', { session: false }), asyncHandler(create));

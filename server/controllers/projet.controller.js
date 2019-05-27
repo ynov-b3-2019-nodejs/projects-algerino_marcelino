@@ -16,8 +16,8 @@ async function insert(entity) {
   return await Entity.create(entity);
 }
 
-async function update(id, entity) {
-  return await Entity.update(entity, { where: { id: id }});
+async function update(entity) {
+  return await Entity.update(entity, { where: { id: entity.id }});
 }
 
 async function destroy(id) {

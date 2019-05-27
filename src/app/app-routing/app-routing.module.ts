@@ -20,10 +20,9 @@ const routes: Routes = [{
 {
   path: 'livrables',
   component: LivrableTableListComponent,
-  children: [{
-    path: ':id',
-    component: LivrableDetailComponent
-  }]
+}, {
+  path: 'livrables/:id',
+  component: LivrableDetailComponent
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
