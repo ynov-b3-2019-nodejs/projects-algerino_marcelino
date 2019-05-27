@@ -69,15 +69,15 @@ export class ProjetService {
   }
 
   /**
-  * SERVICES :  Suppression d'un projet
-  * @param id  - Passe en paramétre l'id de l'objet
-  *
-  * Exemple :
-  * ```typescript
-  * this.portefeuilleService.delete(id).subscribe(data => {});
-  * ```
-  */
+    * SERVICES :  Suppression d'un projet
+    * @param id  - Passe en paramétre l'id de l'objet
+    *
+    * Exemple :
+    * ```typescript
+    * this.portefeuilleService.detail(id).subscribe(data => {});
+    * ```
+    */
   detail(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id);
+    return this.http.get(environment.url + this.entityUrl + "/detail/" + id);
   }
 }

@@ -1,1 +1,6 @@
+<ng-container *ngIf="projet">
 <mat-card>{{projet.nom}}</mat-card>
+<div style="margin:1rem"></div>
+<app-livrable-table-list [projetId]="projet.id"></app-livrable-table-list>
+</ng-container>
+

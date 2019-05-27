@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { HomeComponent } from '../home/home.component';
 import { ProjetTableListComponent } from '../pages/projet/projet-table-list/projet-table-list.component';
+import { ProjetDetailComponent } from '../pages/projet/projet-detail/projet-detail.component';
+import { LivrableTableListComponent } from '../pages/livrable/livrable-table-list/livrable-table-list.component';
+import { LivrableDetailComponent } from '../pages/livrable/livrable-detail/livrable-detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,10 +13,9 @@ const routes: Routes = [{
 }, {
   path: 'projets',
   component: ProjetTableListComponent,
-    children: [{
-      path: ':id',
-      component: ProjetDetailComponent
-    }]
+}, {
+    path: 'projets/:id',
+  component: ProjetDetailComponent
 },
 {
   path: 'livrables',
