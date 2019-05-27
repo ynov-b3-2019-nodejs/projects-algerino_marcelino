@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import { TableListComponent } from '../table-list/table-list.component';
+import { TableListPortefeuilleComponent } from '../table-list/table-list-portefeuille.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Portefeuille } from '../../../models/portefeuille';
 import { PortefeuilleService } from '../../../services/portefeuille.service';
@@ -22,7 +22,7 @@ export class EditPortefeuilleComponent implements OnInit {
     private portefeuilleService: PortefeuilleService,
     private statutService: StatutService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TableListComponent>) {
+    private dialogRef: MatDialogRef<TableListPortefeuilleComponent>) {
       this.statutService.list().subscribe((datas: [Statut]) => {
         this.statuts = datas;
       });

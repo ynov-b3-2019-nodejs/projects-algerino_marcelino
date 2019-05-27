@@ -5,13 +5,14 @@ import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource, MatPaginat
 import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.component';
 import { EditPortefeuilleComponent } from '../edit-portefeuille/edit-portefeuille.component';
 import {PageEvent} from '@angular/material/typings/paginator';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-portefeuille-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.scss'],
+  templateUrl: './table-list-portefeuille.component.html',
+  styleUrls: ['./table-list-portefeuille.component.scss'],
 })
-export class TableListComponent implements OnInit {
+export class TableListPortefeuilleComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut', 'action'];
   portefeuille: MatTableDataSource<Portefeuille>;
   limit = 5;
@@ -25,7 +26,8 @@ export class TableListComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private portefeuilleService: PortefeuilleService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -81,6 +83,10 @@ export class TableListComponent implements OnInit {
     this.limit = event.pageSize;
     this.page = event.pageIndex;
     this.loadData();
+  }
+
+  goToDetail(portefeuilleId: number) {
+    this.router.navigate([`/portefeuille/${portefeuilleId}`]);
   }
 
 }

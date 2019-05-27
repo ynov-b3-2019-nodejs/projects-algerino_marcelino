@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
-import { TableListComponent} from '../table-list/table-list.component';
+import { TableListPortefeuilleComponent} from '../table-list/table-list-portefeuille.component';
 import { PortefeuilleService} from '../../../services/portefeuille.service';
 import { Portefeuille} from '../../../models/portefeuille';
 import { StatutService} from '../../../services/statut.service';
@@ -22,7 +22,7 @@ export class FormPortefeuilleComponent implements OnInit {
     private portefeuilleService: PortefeuilleService,
     private statutService: StatutService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TableListComponent>,
+    private dialogRef: MatDialogRef<TableListPortefeuilleComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     this.userForm = this.fb.group({
       'nom': ['', Validators.required],

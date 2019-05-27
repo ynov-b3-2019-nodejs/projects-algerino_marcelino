@@ -23,7 +23,6 @@ import {
   MatSelectModule, MatPaginatorIntl,
 } from '@angular/material';
 import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate/core';
-import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
 
 @NgModule({
   imports: [
