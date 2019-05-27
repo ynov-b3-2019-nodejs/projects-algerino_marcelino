@@ -22,6 +22,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';
 import { FormProjetComponent } from './pages/projet/form-projet/form-projet.component';
+import { LivrableTableListComponent } from './pages/livrable/livrable-table-list/livrable-table-list.component';
+import { FormLivrableComponent } from './pages/livrable/form-livrable/form-livrable.component';
+import { LivrableDetailComponent } from './pages/livrable/livrable-detail/livrable-detail.component';
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -34,6 +37,9 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     FormPortefeuilleComponent,
     ProjetTableListComponent,
     FormProjetComponent,
+    LivrableTableListComponent,
+    FormLivrableComponent,
+    LivrableDetailComponent,
   ],
   imports: [
     BrowserModule,

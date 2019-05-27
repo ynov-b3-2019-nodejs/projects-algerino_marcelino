@@ -11,7 +11,7 @@ async function list(req, res) {
   res.json( await EntityController.list(req.params.projetId));
 }
 
-router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));
+router.get('/detail/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));
 async function get(req, res) {
   res.json( await EntityController.get(req.params.id));
 }
