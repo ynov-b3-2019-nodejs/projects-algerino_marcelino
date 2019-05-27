@@ -1,3 +1,4 @@
+import { ProjetDetailComponent } from './../pages/projet/projet-detail/projet-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
@@ -9,7 +10,11 @@ const routes: Routes = [{
   component: HomeComponent
 }, {
   path: 'projets',
-  component: ProjetTableListComponent
+  component: ProjetTableListComponent,
+    children: [{
+      path: ':id',
+      component: ProjetDetailComponent
+    }]
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'

@@ -52,7 +52,7 @@ export class ProjetService {
   * ```
   */
   edit(projet: Projet) {
-    return this.http.patch(environment.url + this.entityUrl + "/" + projet.id , projet);
+    return this.http.patch(environment.url + this.entityUrl + "/" + projet.id, projet);
   }
 
   /**
@@ -66,5 +66,18 @@ export class ProjetService {
   */
   delete(id: number) {
     return this.http.delete(environment.url + this.entityUrl + "/" + id);
+  }
+
+  /**
+  * SERVICES :  Suppression d'un projet
+  * @param id  - Passe en paramétre l'id de l'objet
+  *
+  * Exemple :
+  * ```typescript
+  * this.portefeuilleService.delete(id).subscribe(data => {});
+  * ```
+  */
+  detail(id: number) {
+    return this.http.get(environment.url + this.entityUrl + "/" + id);
   }
 }
