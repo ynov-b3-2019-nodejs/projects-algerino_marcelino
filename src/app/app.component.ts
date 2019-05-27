@@ -5,7 +5,7 @@ import { MatIconRegistry } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 
 
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './services/auth.service';
 import * as schema from './schema/equipment.json';
 
 @Component({

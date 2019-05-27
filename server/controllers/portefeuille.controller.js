@@ -1,5 +1,6 @@
 let Entity = require('../models/sequelize/portefeuille');
 const Statut = require('../models/sequelize/statut');
+const Projet = require('../models/sequelize/projet');
 
 
 module.exports = {
@@ -23,9 +24,9 @@ async function destroy(id) {
 }
 
 async function get(id) {
-  return await Entity.findOne({where: {_id: id}});
+  return await Entity.findOne({where: {_id: id}, include:[Projet]});
 }
 
 async function list() {
-  return await Entity.findAll({include: Statut});
+  return await Entity.findAll({include: [Statut]});
 }
