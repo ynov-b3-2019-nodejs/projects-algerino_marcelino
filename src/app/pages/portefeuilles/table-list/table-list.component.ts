@@ -9,7 +9,7 @@ import {PageEvent} from '@angular/material/typings/paginator';
 @Component({
   selector: 'app-portefeuille-table-list',
   templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.scss']
+  styleUrls: ['./table-list.component.scss'],
 })
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut', 'action'];
@@ -78,7 +78,6 @@ export class TableListComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent) {
-    console.log('event ==>', event);
     this.limit = event.pageSize;
     this.page = event.pageIndex;
     this.loadData();

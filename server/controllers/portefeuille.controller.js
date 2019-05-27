@@ -1,6 +1,6 @@
-let Entity = require('../models/sequelize/portefeuille');
+const Entity = require('../models/sequelize/portefeuille');
 const Statut = require('../models/sequelize/statut');
-
+const Projet = require('../models/sequelize/projet');
 
 module.exports = {
   insert,
@@ -24,11 +24,15 @@ async function destroy(id) {
 }
 
 async function get(id) {
-  return await Entity.findOne({where: {id: id}});
+  return await Entity.findOne({where: {id: id}, include: [Status, Projet]});
 }
 
 async function list(limit, page) {
-  return await Entity.findAll({include: Statut, limit: Number(limit), offset: Number(page) * Number(limit)});
+  return await Entity.findAll({
+    include: Statut,
+    limit: Number(limit),
+    offset: Number(page) * Number(limit)
+  });
 }
 
 async function count() {

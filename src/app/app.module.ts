@@ -16,12 +16,13 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
 import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule} from '@angular/material';
+import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule, MatPaginatorIntl} from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';
 import { EditPortefeuilleComponent } from './pages/portefeuilles/edit-portefeuille/edit-portefeuille.component';
+import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -66,10 +67,15 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     {
       provide: LOCALE_ID,
       useValue: 'fr'
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: getFrenchPaginatorIntl()
     }
   ],
   entryComponents: [FormPortefeuilleComponent, EditPortefeuilleComponent],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }

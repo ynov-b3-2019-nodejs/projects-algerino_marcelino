@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {TableListComponent} from '../table-list/table-list.component';
-import {PortefeuilleService} from '../../../services/portefeuille.service';
-import {Portefeuille} from '../../../models/portefeuille';
-import {StatutService} from '../../../services/statut.service';
-import {Statut} from '../../../models/statut';
+import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { TableListComponent} from '../table-list/table-list.component';
+import { PortefeuilleService} from '../../../services/portefeuille.service';
+import { Portefeuille} from '../../../models/portefeuille';
+import { StatutService} from '../../../services/statut.service';
+import { Statut} from '../../../models/statut';
 
 @Component({
   selector: 'app-form-portefeuille',
@@ -33,8 +33,7 @@ export class FormPortefeuilleComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   saveUser() {
     if (this.userForm.dirty && this.userForm.valid) {
