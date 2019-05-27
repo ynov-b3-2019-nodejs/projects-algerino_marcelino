@@ -24,6 +24,13 @@ import {ProjetTableListComponent } from './pages/projet/projet-table-list/projet
 import {EditPortefeuilleComponent } from './pages/portefeuilles/edit-portefeuille/edit-portefeuille.component';
 import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
 import { DetailPortefeuilleComponent } from './pages/portefeuilles/detail-portefeuille/detail-portefeuille.component';
+import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
+import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';
+import { FormProjetComponent } from './pages/projet/form-projet/form-projet.component';
+import { ProjetDetailComponent } from './pages/projet/projet-detail/projet-detail.component';
+import { LivrableTableListComponent } from './pages/livrable/livrable-table-list/livrable-table-list.component';
+import { FormLivrableComponent } from './pages/livrable/form-livrable/form-livrable.component';
+import { LivrableDetailComponent } from './pages/livrable/livrable-detail/livrable-detail.component';
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -37,6 +44,11 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     ProjetTableListComponent,
     EditPortefeuilleComponent,
     DetailPortefeuilleComponent,
+    FormProjetComponent,
+    LivrableTableListComponent,
+    FormLivrableComponent,
+    LivrableDetailComponent,
+    ProjetDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +87,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, EditPortefeuilleComponent],
+  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, EditPortefeuilleComponent],
   bootstrap: [AppComponent],
 
 })

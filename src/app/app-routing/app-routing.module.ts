@@ -6,8 +6,23 @@ import { TableListPortefeuilleComponent } from '../pages/portefeuilles/table-lis
 import { DetailPortefeuilleComponent } from '../pages/portefeuilles/detail-portefeuille/detail-portefeuille.component';
 
 const routes: Routes = [{
-  path: '/',
+  path: '',
   component: HomeComponent
+}, {
+  path: 'projets',
+  component: ProjetTableListComponent,
+    children: [{
+      path: ':id',
+      component: ProjetDetailComponent
+    }]
+},
+{
+  path: 'livrables',
+  component: LivrableTableListComponent,
+  children: [{
+    path: ':id',
+    component: LivrableDetailComponent
+  }]
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'

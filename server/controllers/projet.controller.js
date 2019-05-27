@@ -1,4 +1,7 @@
 let Entity = require('../models/sequelize/projet');
+const Portefeuille = require('../models/sequelize/portefeuille');
+const Statut = require('../models/sequelize/statut');
+const Livrable = require('../models/sequelize/livrable');
 
 
 module.exports = {
@@ -13,8 +16,8 @@ async function insert(entity) {
   return await Entity.create(entity);
 }
 
-async function update(entity) {
-  return await Entity.update(entity, {where: {id: entity.id}});
+async function update(id, entity) {
+  return await Entity.update(entity, { where: { id: id }});
 }
 
 async function destroy(id) {
@@ -22,9 +25,9 @@ async function destroy(id) {
 }
 
 async function get(id) {
-  return await Entity.findOne({where: {id: id}});
+  return await Entity.findOne({ where: { id: id }, include: [Portefeuille, Statut, Livrable]});
 }
 
-async function list() {
-  return await Entity.findAll();
+async function list(id) {
+  return await Entity.findAll({ where: { portefeuilleId: id }, include: [Portefeuille, Statut]});
 }

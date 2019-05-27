@@ -1,9 +1,19 @@
 <div class="mat-elevation-z8">
   <div *ngIf="isDataLoaded">
-    <table mat-table [dataSource]="projet">
+    <table mat-table [dataSource]="livrable">
       <ng-container matColumnDef="nom">
         <th mat-header-cell *matHeaderCellDef> Nom</th>
         <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateprevu">
+        <th mat-header-cell *matHeaderCellDef> Date de Début</th>
+        <td mat-cell *matCellDef="let element"> {{element.dateprevu.toLocaleDateString()}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="datefin">
+        <th mat-header-cell *matHeaderCellDef> Date de Fin</th>
+        <td mat-cell *matCellDef="let element"> {{element.datefin.toLocaleDateString()}} </td>
       </ng-container>
 
       <ng-container matColumnDef="createdAt">
@@ -21,27 +31,25 @@
         <td mat-cell *matCellDef="let element"> {{element.Statut ? element.Statut.nom : ''}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="portefeuille">
-        <th mat-header-cell *matHeaderCellDef> Portefeuille</th>
-        <td mat-cell *matCellDef="let element"> {{element.Portefeuille ? element.Portefeuille.nom : ''}} </td>
+      <ng-container matColumnDef="projet">
+        <th mat-header-cell *matHeaderCellDef> Projet</th>
+        <td mat-cell *matCellDef="let element"> {{element.Projet ? element.Projet.nom : ''}} </td>
       </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button>
-          <mat-icon aria-label="Édition" matTooltip="Édition" matTooltipPosition="after" (click)="openDialog(element)">edit
-          </mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon aria-label="Supression" matTooltip="Supression" matTooltipPosition="after"
-            (click)="deleteProjet(element.id)">delete</mat-icon>
-        </button>
-                <button mat-icon-button>
-                  <mat-icon aria-label="Accéder" matTooltip="Accéder" matTooltipPosition="after">arrow_forward</mat-icon>
-                </button>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button>
+            <mat-icon aria-label="Édition" matTooltip="Édition" matTooltipPosition="after"
+              (click)="openDialog(element)">edit
+            </mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-label="Supression" matTooltip="Supression" matTooltipPosition="after"
+              (click)="deleteProjet(element.id)">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
