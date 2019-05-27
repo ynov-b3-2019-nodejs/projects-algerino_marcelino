@@ -4,6 +4,7 @@ import {Portefeuille} from '../../../models/portefeuille';
 import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource, MatPaginator} from '@angular/material';
 import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.component';
 import { EditPortefeuilleComponent } from '../edit-portefeuille/edit-portefeuille.component';
+import {PageEvent} from '@angular/material/typings/paginator';
 
 @Component({
   selector: 'app-portefeuille-table-list',
@@ -13,6 +14,9 @@ import { EditPortefeuilleComponent } from '../edit-portefeuille/edit-portefeuill
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut', 'action'];
   portefeuille: MatTableDataSource<Portefeuille>;
+  limit = 5;
+  page = 0;
+  numberOfElements: number;
 
   isDataLoaded = false;
 
@@ -25,12 +29,15 @@ export class TableListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.portefeuilleService.count().subscribe(
+      (occurrences) => this.numberOfElements = occurrences
+    );
     this.loadData();
   }
 
   loadData() {
     this.isDataLoaded = false;
-    this.portefeuilleService.list().subscribe((datas: Array<Portefeuille>) => {
+    this.portefeuilleService.list(this.limit, this.page).subscribe((datas: Array<Portefeuille>) => {
       for (const data of datas) {
         data.createdAt = new Date(Date.parse(Date()));
         data.updatedAt = new Date(Date.parse(Date()));
@@ -56,15 +63,25 @@ export class TableListComponent implements OnInit {
 
     dialogRef.componentInstance.getCurrentPortefeuille(targetPortefeuille);
 
-    dialogRef.afterClosed().subscribe((result: Portefeuille) => {
-      this.loadData();
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadData();
+        this.snackBar.open(`Portefeuille modifié avec succès !`, 'Ok', {duration: 3000});
+      }
     });
   }
 
   deleteLine(portefeuilleId: number) {
     this.portefeuilleService.delete(portefeuilleId).subscribe(
-      (data) => { this.loadData(); }
+      () => { this.loadData(); }
     );
+  }
+
+  pageEvent(event: PageEvent) {
+    console.log('event ==>', event);
+    this.limit = event.pageSize;
+    this.page = event.pageIndex;
+    this.loadData();
   }
 
 }

@@ -8,8 +8,12 @@ module.exports = router;
 
 router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(list));
 async function list(req, res) {
-  console.log("OK 1");
-  res.json(await EntityController.list());
+  res.json(await EntityController.list(req.query.limit, req.query.page));
+}
+
+router.get('/count', passport.authenticate('jwt', { session: false }), asyncHandler(count));
+async function count(req, res) {
+  res.send(200, await EntityController.count());
 }
 
 router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));
@@ -19,7 +23,6 @@ async function get(req, res) {
 
 router.put('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));
 async function update(req, res) {
-  console.log('BODY ==> ', req.body);
   res.json(await EntityController.update(req.body, req.params.id));
 }
 

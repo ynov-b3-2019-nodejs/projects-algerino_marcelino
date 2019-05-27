@@ -13,8 +13,12 @@ export class PortefeuilleService {
   constructor(private http: HttpClient) {
   }
 
-  list() {
-    return this.http.get(environment.url + this.entityUrl);
+  count() {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count');
+  }
+
+  list(limit: number, page: number) {
+    return this.http.get(environment.url + this.entityUrl + `?limit=${limit}&page=${page}`);
   }
 
   create(portefeuille: Portefeuille) {

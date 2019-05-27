@@ -7,7 +7,8 @@ module.exports = {
   update,
   destroy,
   get,
-  list
+  list,
+  count
 };
 
 async function insert(entity) {
@@ -26,6 +27,10 @@ async function get(id) {
   return await Entity.findOne({where: {id: id}});
 }
 
-async function list() {
-  return await Entity.findAll({include: Statut});
+async function list(limit, page) {
+  return await Entity.findAll({include: Statut, limit: Number(limit), offset: Number(page) * Number(limit)});
+}
+
+async function count() {
+  return await Entity.count();
 }
