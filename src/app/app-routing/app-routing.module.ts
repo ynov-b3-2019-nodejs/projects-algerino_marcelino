@@ -14,7 +14,7 @@ const routes: Routes = [{
   component: ProjetTableListComponent
 },
 {
-  path: 'livrables/:id',
+  path: 'livrables',
   component: LivrableTableListComponent,
   children: [{
     path: ':id',
