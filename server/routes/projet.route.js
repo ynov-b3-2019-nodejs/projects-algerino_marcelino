@@ -11,9 +11,9 @@ async function list(req, res) {
   res.json(await EntityController.list(req.params.id));
 }
 
-router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));
+router.get('/detail/:portefeuilleId', passport.authenticate('jwt', { session: false }), asyncHandler(get));
 async function get(req, res) {
-  res.json(await EntityController.get(req.params.id));
+  res.json(await EntityController.get(req.params.portefeuilleId));
 }
 
 router.patch('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));

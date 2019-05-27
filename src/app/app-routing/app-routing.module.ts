@@ -1,5 +1,3 @@
-import { LivrableDetailComponent } from './../pages/livrable/livrable-detail/livrable-detail.component';
-import { LivrableTableListComponent } from './../pages/livrable/livrable-table-list/livrable-table-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
@@ -11,7 +9,11 @@ const routes: Routes = [{
   component: HomeComponent
 }, {
   path: 'projets',
-  component: ProjetTableListComponent
+  component: ProjetTableListComponent,
+    children: [{
+      path: ':id',
+      component: ProjetDetailComponent
+    }]
 },
 {
   path: 'livrables',
