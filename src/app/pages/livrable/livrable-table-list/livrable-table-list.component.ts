@@ -13,7 +13,7 @@ import { FormLivrableComponent } from './../form-livrable/form-livrable.componen
 export class LivrableTableListComponent implements OnInit {
 
   displayedColumns: string[] = ['nom', 'dateprevu', 'datefin', 'statut', 'action'];
-  livrable        : MatTableDataSource<Livrable>;
+  livrable: MatTableDataSource<Livrable>;
   limit = 5;
   page = 0;
   numberOfElements: number;
