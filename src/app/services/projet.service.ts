@@ -24,8 +24,8 @@ export class ProjetService {
    * this.ProjetService.list().subscribe((datas: Array<projet>) => {});
    * ```
    */
-  list(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id);
+  list(id: number, page:number,limit:number) {
+    return this.http.get(environment.url + this.entityUrl + "/" + id + "?page=" + page + "&limit=" + limit);
   }
 
 
@@ -52,7 +52,7 @@ export class ProjetService {
   * ```
   */
   edit(projet: Projet) {
-    return this.http.patch(environment.url + this.entityUrl + "/" + projet.id, projet);
+    return this.http.patch(environment.url + this.entityUrl, projet);
   }
 
   /**
@@ -69,15 +69,20 @@ export class ProjetService {
   }
 
   /**
-  * SERVICES :  Suppression d'un projet
-  * @param id  - Passe en paramétre l'id de l'objet
-  *
-  * Exemple :
-  * ```typescript
-  * this.portefeuilleService.delete(id).subscribe(data => {});
-  * ```
-  */
+    * SERVICES :  Suppression d'un projet
+    * @param id  - Passe en paramétre l'id de l'objet
+    *
+    * Exemple :
+    * ```typescript
+    * this.portefeuilleService.detail(id).subscribe(data => {});
+    * ```
+    */
   detail(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id);
+    return this.http.get(environment.url + this.entityUrl + "/detail/" + id);
+  }
+
+
+  count() {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count');
   }
 }

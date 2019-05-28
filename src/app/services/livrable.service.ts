@@ -22,8 +22,8 @@ export class LivrableService {
    * this.ProjetService.list().subscribe((datas: Array<projet>) => {});
    * ```
    */
-  list(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id);
+  list(id: number, page: number, limit: number) {
+    return this.http.get(environment.url + this.entityUrl + "/" + id + "?page=" + page + "&limit=" + limit);
   }
 
   /**
@@ -62,7 +62,7 @@ export class LivrableService {
   * ```
   */
   edit(livrable: Livrable) {
-    return this.http.patch(environment.url + this.entityUrl + "/" + livrable.id, livrable);
+    return this.http.patch(environment.url + this.entityUrl , livrable);
   }
 
   /**
@@ -76,6 +76,11 @@ export class LivrableService {
   */
   delete(id: number) {
     return this.http.delete(environment.url + this.entityUrl + "/" + id);
+  }
+
+
+  count() {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count');
   }
 
 }

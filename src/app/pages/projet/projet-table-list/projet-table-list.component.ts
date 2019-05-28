@@ -2,7 +2,7 @@ import { Projet } from "./../../../models/projet";
 import { ProjetService } from './../../../services/projet.service';
 import { FormProjetComponent } from './../form-projet/form-projet.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginatorIntl } from '@angular/material';
+import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginatorIntl, PageEvent } from '@angular/material';
 
 
 @Component({
@@ -13,10 +13,13 @@ import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginatorIntl } from '@a
 
 export class ProjetTableListComponent implements OnInit {
 
-  displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut', 'portefeuille', 'action'];
+  displayedColumns: string[] = ['nom', 'statut', 'portefeuille', 'action'];
   projet: MatTableDataSource<Projet>;
 
   portefeuilleId: number = 1;
+  limit = 5;
+  page = 0;
+  numberOfElements: number;
 
   isDataLoaded = false;
 
@@ -28,13 +31,12 @@ export class ProjetTableListComponent implements OnInit {
 
   loadData(){
     this.isDataLoaded = false;
-    this.projetService.list(this.portefeuilleId).subscribe((datas: Array<Projet>) => {
 
-      for(const data of datas){
-        data.createdAt = new Date(Date.parse(Date()));
-        data.updatedAt = new Date(Date.parse(Date()));
-      }
+    this.projetService.count().subscribe(
+      (occurrences) => this.numberOfElements = occurrences
+    );
 
+    this.projetService.list(this.portefeuilleId, this.page, this.limit).subscribe((datas: Array<Projet>) => {
       this.projet = new MatTableDataSource<Projet>(datas);
       this.isDataLoaded = true;
     });
@@ -52,6 +54,12 @@ export class ProjetTableListComponent implements OnInit {
         this.loadData();
       }
     });
+  }
+
+  pageEvent(event: PageEvent) {
+    this.limit = event.pageSize;
+    this.page = event.pageIndex;
+    this.loadData();
   }
 
   deleteProjet(projetId: number) {

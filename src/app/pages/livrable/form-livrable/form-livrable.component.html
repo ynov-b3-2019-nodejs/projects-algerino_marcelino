@@ -1,19 +1,30 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-  <form [formGroup]="livrableForm" (submit)="saveDataLivrable()">
+<h2 *ngIf="action === 'create'" mat-dialog-title>Créé votre livrable</h2>
+<h2 *ngIf="action === 'edit'" mat-dialog-title>Editer votre livrable</h2>
+<mat-dialog-content class="mat-typography" style="  width: 25rem !important;">
+  <form [formGroup]="livrableForm" (submit)="saveDataLivrable()" class="container-field">
     <mat-form-field>
       <input formControlName="nom" id="nom" matInput placeholder="Nom" required>
       <mat-error *ngIf="!livrableForm.controls.nom.valid">Le nom est requis</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Statut : </mat-label>
-      <mat-select formControlName="statutId" id="statutId">
-        <mat-option *ngFor="let statut of statuts" [value]="statut.id">
-          {{statut.nom}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="!livrableForm.controls.statutId.valid">Le statut est requis</mat-error>
+      <input matInput [matDatepicker]="picker_dateprevue" placeholder="Date de début" formControlName="dateprevu">
+      <mat-datepicker-toggle matSuffix [for]="picker_dateprevue"></mat-datepicker-toggle>
+      <mat-datepicker #picker_dateprevue></mat-datepicker>
     </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker_datefin" placeholder="Date de fin" formControlName="datefin">
+      <mat-datepicker-toggle matSuffix [for]="picker_datefin"></mat-datepicker-toggle>
+      <mat-datepicker #picker_datefin></mat-datepicker>
+    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Statut : </mat-label>
+        <mat-select formControlName="statutId" id="statutId">
+          <mat-option *ngFor="let statut of statuts" [value]="statut.id">
+            {{statut.nom}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!livrableForm.controls.statutId.valid">Le statut est requis</mat-error>
+      </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

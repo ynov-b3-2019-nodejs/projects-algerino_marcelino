@@ -20,7 +20,7 @@ import {
   MatTreeModule,
   MatProgressBarModule,
   MatFormFieldModule,
-  MatSelectModule, MatPaginatorIntl,
+  MatSelectModule, MatPaginatorIntl, MatNativeDateModule, MatDatepickerModule
 } from '@angular/material';
 import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate/core';
 
@@ -47,6 +47,8 @@ import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate
     MatFormFieldModule,
     MatSelectModule,
     FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatToolbarModule,
@@ -71,6 +73,8 @@ import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate
     FlexLayoutModule,
     CommonModule,
     TranslateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [],
   providers: [

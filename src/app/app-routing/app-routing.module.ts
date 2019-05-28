@@ -8,6 +8,8 @@ import {LivrableDetailComponent} from '../pages/livrable/livrable-detail/livrabl
 import {LivrableTableListComponent} from '../pages/livrable/livrable-table-list/livrable-table-list.component';
 import {ProjetDetailComponent} from '../pages/projet/projet-detail/projet-detail.component';
 import {ProjetTableListComponent} from '../pages/projet/projet-table-list/projet-table-list.component';
+import { LivrableTableListComponent } from '../pages/livrable/livrable-table-list/livrable-table-list.component';
+import { LivrableDetailComponent } from '../pages/livrable/livrable-detail/livrable-detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,18 +17,16 @@ const routes: Routes = [{
 }, {
   path: 'projets',
   component: ProjetTableListComponent,
-    children: [{
-      path: ':id',
-      component: ProjetDetailComponent
-    }]
+}, {
+  path: 'projets/:id',
+  component: ProjetDetailComponent
 },
 {
   path: 'livrables',
   component: LivrableTableListComponent,
-  children: [{
-    path: ':id',
-    component: LivrableDetailComponent
-  }]
+}, {
+  path: 'livrables/:id',
+  component: LivrableDetailComponent
 }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
