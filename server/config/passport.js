@@ -4,7 +4,6 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const bcrypt = require('bcrypt');
 
-const User = require('../models/mongo/user.model');
 const UserSeq = require('../models/sequelize/user');
 const config = require('./config');
 
