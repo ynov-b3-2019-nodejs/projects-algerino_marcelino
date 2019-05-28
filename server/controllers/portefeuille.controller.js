@@ -24,7 +24,20 @@ async function destroy(id) {
 }
 
 async function get(col, val) {
-  return await Entity.findOne({where: {[col]: val}, include: [Statut, Projet]});
+  return await Entity.findOne(
+    {
+      where: {[col]: val},
+      include: [
+        Statut,
+        {
+          model: Projet,
+          include: [
+            Statut
+          ]
+        }
+        ]
+    }
+    );
 }
 
 async function list(limit, page) {

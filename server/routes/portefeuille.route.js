@@ -21,7 +21,7 @@ async function get(req, res) {
   res.json(await EntityController.get(req.query.col, req.query.val));
 }
 
-router.put('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));
+router.patch('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));
 async function update(req, res) {
   res.json(await EntityController.update(req.body, req.params.id));
 }

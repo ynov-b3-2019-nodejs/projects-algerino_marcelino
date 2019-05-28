@@ -19,8 +19,8 @@ export class Projet {
     this.StatutId = statutId;
     this.PortefeuilleId = portefeuilleId;
 
-    if(id){
+    if (id) {
       this.id = id;
     }
-  }
+}
 }

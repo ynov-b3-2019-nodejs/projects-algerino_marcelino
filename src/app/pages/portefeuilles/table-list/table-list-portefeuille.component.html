@@ -31,6 +31,10 @@
               matTooltip="Options"
               matTooltipPosition="after">more_vert</mat-icon>
             <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="goToDetail(element.id)">
+                <mat-icon>apps</mat-icon>
+                <span>Détail</span>
+              </button>
               <button mat-menu-item (click)="editDialog(element)">
                 <mat-icon >edit</mat-icon>
                 <span>Éditer</span>
@@ -38,10 +42,6 @@
               <button mat-menu-item (click)="deleteLine(element.id)">
                 <mat-icon >delete</mat-icon>
                 <span>Supprimer</span>
-              </button>
-              <button mat-menu-item (click)="goToDetail(element.id)">
-                <mat-icon>apps</mat-icon>
-                <span>Détail</span>
               </button>
             </mat-menu>
           </button>

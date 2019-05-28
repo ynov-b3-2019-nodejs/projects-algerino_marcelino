@@ -1,30 +1,65 @@
 <div *ngIf="dataLoaded">
   <mat-card>
     <h1>{{ currentPortefeuille.nom }}</h1>
+
     <h2>Projets : </h2>
-    <table mat-table [dataSource]="currentPortefeuille.Projets">
+    <table class="table-full-width" mat-table [dataSource]="currentPortefeuille.Projets">
 
       <ng-container matColumnDef="nom">
         <th mat-header-cell *matHeaderCellDef> Nom</th>
         <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> Date de création</th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-      </ng-container>
-
       <ng-container matColumnDef="updatedAt">
         <th mat-header-cell *matHeaderCellDef> Date de modification</th>
-        <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt.toLocaleDateString()}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="Status">
-        <th mat-header-cell *matHeaderCellDef> Status/th>
+      <ng-container matColumnDef="Statut">
+        <th mat-header-cell *matHeaderCellDef> Status</th>
         <td mat-cell *matCellDef="let element"> {{element.Statut.nom}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-label="Options"
+              matTooltip="Options"
+              matTooltipPosition="after">more_vert</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="goToDetail(element.id)">
+                <mat-icon>apps</mat-icon>
+                <span>Détail</span>
+              </button>
+              <button mat-menu-item (click)="editDialog(element)">
+                <mat-icon >edit</mat-icon>
+                <span>Éditer</span>
+              </button>
+              <button mat-menu-item (click)="deleteLine(element.id)">
+                <mat-icon >delete</mat-icon>
+                <span>Supprimer</span>
+              </button>
+            </mat-menu>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div class="paginator">
+      <mat-paginator
+        [length]="currentPortefeuille.Projets.length"
+        [pageSize]="limit"
+        [pageIndex]="page"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageEvent($event)">
+      </mat-paginator>
+      <button (click)="openDialog()" mat-mini-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
   </mat-card>
 </div>
 
