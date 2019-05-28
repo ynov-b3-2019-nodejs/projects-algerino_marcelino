@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
-const User = require('../models/mongo/user.model');
 const UserSeq = require('../models/sequelize/user');
 
 const userSchema = Joi.object({
