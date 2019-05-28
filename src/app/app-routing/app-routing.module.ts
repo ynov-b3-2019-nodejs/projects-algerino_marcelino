@@ -1,3 +1,4 @@
+import { CalendrierEventListComponent } from './../pages/calendrier/calendrier-event-list/calendrier-event-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
@@ -23,7 +24,11 @@ const routes: Routes = [{
 }, {
   path: 'livrables/:id',
   component: LivrableDetailComponent
-}, {
+},
+  {
+    path: 'calendrier',
+    component: CalendrierEventListComponent
+  }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
 }, {

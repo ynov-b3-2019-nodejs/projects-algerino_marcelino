@@ -26,11 +26,17 @@ import { ProjetDetailComponent } from './pages/projet/projet-detail/projet-detai
 import { LivrableTableListComponent } from './pages/livrable/livrable-table-list/livrable-table-list.component';
 import { FormLivrableComponent } from './pages/livrable/form-livrable/form-livrable.component';
 import { LivrableDetailComponent } from './pages/livrable/livrable-detail/livrable-detail.component';
+import { CalendrierEventListComponent } from './pages/calendrier/calendrier-event-list/calendrier-event-list.component';
+import { CalendrierEventFormComponent } from './pages/calendrier/calendrier-event-form/calendrier-event-form.component';
 import { getFrenchPaginatorIntl } from './i18l/MyMatPaginatorIntl';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -50,6 +56,8 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     FormLivrableComponent,
     LivrableDetailComponent,
     ProjetDetailComponent,
+    CalendrierEventListComponent,
+    CalendrierEventFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,11 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     }),
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     {
