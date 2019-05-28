@@ -30,6 +30,11 @@ export class LivrableTableListComponent implements OnInit {
 
   loadData() {
     this.isDataLoaded = false;
+
+    this.livrableService.count().subscribe(
+      (occurrences) => this.numberOfElements = occurrences
+    );
+
     this.livrableService.list(this.projetId, this.page, this.limit).subscribe((datas: Array<Livrable>) => {
       this.livrable     = new MatTableDataSource<Livrable>(datas);
       this.isDataLoaded = true;

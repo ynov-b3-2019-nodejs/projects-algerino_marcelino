@@ -31,6 +31,7 @@ export class ProjetTableListComponent implements OnInit {
 
   loadData(){
     this.isDataLoaded = false;
+
     this.projetService.count().subscribe(
       (occurrences) => this.numberOfElements = occurrences
     );

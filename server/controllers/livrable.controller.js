@@ -8,7 +8,8 @@ module.exports = {
   update,
   destroy,
   get,
-  list
+  list,
+  count
 };
 
 async function insert(entity) {
@@ -33,6 +34,11 @@ async function list(id, page, limit) {
     include: [Projet, Statut],
     limit: Number(limit),
     offset: Number(page) * Number(limit) });
+}
+
+
+async function count() {
+  return await Entity.count();
 }
 
 
