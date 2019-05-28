@@ -1,3 +1,33 @@
-<p>
-  detail-portefeuille works!
-</p>
+<div *ngIf="dataLoaded">
+  <mat-card>
+    <h1>{{ currentPortefeuille.nom }}</h1>
+    <h2>Projets : </h2>
+    <table mat-table [dataSource]="currentPortefeuille.Projets">
+
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom</th>
+        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Date de création</th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> Date de modification</th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef> Status/th>
+        <td mat-cell *matCellDef="let element"> {{element.Statut.nom}} </td>
+      </ng-container>
+
+    </table>
+  </mat-card>
+</div>
+
+<div *ngIf="!dataLoaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>

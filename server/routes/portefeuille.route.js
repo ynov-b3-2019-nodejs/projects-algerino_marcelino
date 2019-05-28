@@ -16,9 +16,9 @@ async function count(req, res) {
   res.send(200, await EntityController.count());
 }
 
-router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(get));
+router.get('/get', passport.authenticate('jwt', { session: false }), asyncHandler(get));
 async function get(req, res) {
-  res.json(await EntityController.get(req.params.id));
+  res.json(await EntityController.get(req.query.col, req.query.val));
 }
 
 router.put('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(update));

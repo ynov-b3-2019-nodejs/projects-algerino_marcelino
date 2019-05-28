@@ -23,8 +23,8 @@ async function destroy(id) {
   return await Entity.destroy({where: {id: id}});
 }
 
-async function get(id) {
-  return await Entity.findOne({where: {id: id}, include: [Status, Projet]});
+async function get(col, val) {
+  return await Entity.findOne({where: {[col]: val}, include: [Statut, Projet]});
 }
 
 async function list(limit, page) {

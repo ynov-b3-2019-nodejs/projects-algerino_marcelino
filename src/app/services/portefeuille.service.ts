@@ -18,7 +18,11 @@ export class PortefeuilleService {
   }
 
   list(limit: number, page: number) {
-    return this.http.get(environment.url + this.entityUrl + `?limit=${limit}&page=${page}`);
+    return this.http.get<Portefeuille[]>(environment.url + this.entityUrl + `?limit=${limit}&page=${page}`);
+  }
+
+  get(col: string, val: any) {
+    return this.http.get<Portefeuille>(environment.url + this.entityUrl + `/get?col=${col}&val=${val}`);
   }
 
   create(portefeuille: Portefeuille) {
