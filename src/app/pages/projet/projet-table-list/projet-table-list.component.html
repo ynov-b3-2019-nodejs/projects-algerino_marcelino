@@ -6,16 +6,6 @@
         <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> Créé Le</th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd/MM/yyyy'}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="updatedAt">
-        <th mat-header-cell *matHeaderCellDef> Modifié Le</th>
-        <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'dd/MM/yyyy'}} </td>
-      </ng-container>
-
       <ng-container matColumnDef="statut">
         <th mat-header-cell *matHeaderCellDef> Statut</th>
         <td mat-cell *matCellDef="let element"> {{element.Statut ? element.Statut.nom : ''}} </td>
@@ -55,7 +45,9 @@
     </table>
 
     <div class="paginator">
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator [length]="numberOfElements" [pageSize]="limit" [pageIndex]="page" [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageEvent($event)">
+      </mat-paginator>
       <button (click)="openDialog(null)" mat-mini-fab color="primary">
         <mat-icon>add</mat-icon>
       </button>

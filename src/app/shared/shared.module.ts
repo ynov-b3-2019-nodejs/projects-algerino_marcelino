@@ -25,7 +25,7 @@ import {
   MatSelectModule, MatPaginatorIntl, MatNativeDateModule, MatDatepickerModule
 } from '@angular/material';
 import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate/core';
-import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
+// import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
 
 @NgModule({
   imports: [
@@ -51,7 +51,7 @@ import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
     MatSelectModule,
     FlexLayoutModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   exports: [
     MatToolbarModule,
@@ -77,7 +77,7 @@ import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
     CommonModule,
     TranslateModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   declarations: [],
   providers: [

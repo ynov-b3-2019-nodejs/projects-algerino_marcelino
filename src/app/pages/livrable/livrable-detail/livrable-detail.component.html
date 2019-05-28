@@ -1,11 +1,16 @@
 <ng-container *ngIf="livrable">
   <mat-card>
-    <button mat-icon-button matTooltip="Retour" matTooltipPosition="after"
-      [routerLink]="[ '/projets',livrable.Projet.id ]" style="margin-bottom: 1.1rem;">
-      <mat-icon aria-label="Retour">reply</mat-icon>
-    </button>
-    <mat-card-title>livrable Actuelle: {{livrable.nom}}</mat-card-title>
-    <mat-card-subtitle style="color: rgba(0,0,0,1.54) !important;">Projet Actuelle: {{livrable.Projet.nom}}
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <button class="spacerIcon" mat-icon-button matTooltip="Retour" matTooltipPosition="after"
+          [routerLink]="[ '/projets',livrable.Projet.id ]">
+          <mat-icon aria-label="Retour">reply</mat-icon>
+        </button>
+        <mat-card-title class="spacerIcon spacerTitle">Livrable Actuelle: {{livrable.nom}}</mat-card-title>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card-subtitle class="spacerTitle" style="color: rgba(0,0,0,1.54) !important;">Projet Actuelle:
+      {{livrable.Projet.nom}}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-divider [inset]="true"></mat-divider>
@@ -15,10 +20,6 @@
       <mat-divider [inset]="true"></mat-divider>
       <p>
         Date de Fin : {{livrable.datefin | date:'dd/MM/yyyy'}}
-      </p>
-      <mat-divider [inset]="true"></mat-divider>
-      <p>
-        Créé Le : {{livrable.createdAt | date:'dd/MM/yyyy'}}
       </p>
       <mat-divider [inset]="true"></mat-divider>
       <p>

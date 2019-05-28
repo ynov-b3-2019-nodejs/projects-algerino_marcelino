@@ -24,8 +24,8 @@ export class ProjetService {
    * this.ProjetService.list().subscribe((datas: Array<projet>) => {});
    * ```
    */
-  list(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id);
+  list(id: number, page:number,limit:number) {
+    return this.http.get(environment.url + this.entityUrl + "/" + id + "?page=" + page + "&limit=" + limit);
   }
 
 
@@ -79,5 +79,10 @@ export class ProjetService {
     */
   detail(id: number) {
     return this.http.get(environment.url + this.entityUrl + "/detail/" + id);
+  }
+
+
+  count() {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count');
   }
 }

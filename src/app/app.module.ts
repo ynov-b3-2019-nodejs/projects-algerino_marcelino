@@ -16,7 +16,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
 import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
+import { MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule, MatPaginatorIntl } from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
@@ -26,6 +26,8 @@ import { ProjetDetailComponent } from './pages/projet/projet-detail/projet-detai
 import { LivrableTableListComponent } from './pages/livrable/livrable-table-list/livrable-table-list.component';
 import { FormLivrableComponent } from './pages/livrable/form-livrable/form-livrable.component';
 import { LivrableDetailComponent } from './pages/livrable/livrable-detail/livrable-detail.component';
+import { getFrenchPaginatorIntl } from './i18l/MyMatPaginatorIntl';
+
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -65,6 +67,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     }),
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     {
@@ -79,6 +82,10 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     {
       provide: LOCALE_ID,
       useValue: 'fr'
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: getFrenchPaginatorIntl()
     }
   ],
   entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent],
