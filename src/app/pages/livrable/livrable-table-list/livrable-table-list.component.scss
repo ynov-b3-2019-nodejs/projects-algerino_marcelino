@@ -1,18 +1,18 @@
-table{
+table {
   width: 100%;
 }
 
-.paginator{
+.paginator {
   width: 100%;
   text-align: end;
 }
 
-.paginator > *:first-child{
+.paginator > *:first-child {
   width: 90%;
   display: inline-block;
 }
 
-.paginator > *:last-child{
+.paginator > *:last-child {
   display: inline-block;
   margin-right: 5px;
 }

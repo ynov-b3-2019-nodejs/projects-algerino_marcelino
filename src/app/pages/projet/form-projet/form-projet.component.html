@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Créer portefeuille</h2>
+<h2 mat-dialog-title>Créer projet</h2>
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="userForm" (submit)="saveUser()">
+  <form [formGroup]="projetForm" (submit)="saveDataProjet()">
     <mat-form-field>
       <input formControlName="nom" id="nom" matInput placeholder="Nom" required>
-      <mat-error *ngIf="!userForm.controls.nom.valid">Le nom est requis</mat-error>
+      <mat-error *ngIf="!projetForm.controls.nom.valid">Le nom est requis</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Statut : </mat-label>
@@ -12,11 +12,12 @@
           {{statut.nom}}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="!userForm.controls.statutId.valid">Le statut est requis</mat-error>
+      <mat-error *ngIf="!projetForm.controls.statutId.valid">Le statut est requis</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)="saveUser()">Install</button>
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button (click)="saveDataProjet()">Envoyer</button>
 </mat-dialog-actions>
+
