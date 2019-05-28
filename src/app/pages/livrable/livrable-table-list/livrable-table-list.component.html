@@ -45,11 +45,11 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="[ '/livrables', element.id ]">
             <mat-icon aria-label="Detail" matTooltip="Detail" matTooltipPosition="after">view_module</mat-icon>
-            <span>Detail</span>
+            <span>Détail</span>
           </button>
           <button mat-menu-item (click)="openDialog(element)">
             <mat-icon aria-label="Édition" matTooltip="Édition" matTooltipPosition="after">edit</mat-icon>
-            <span>Editer</span>
+            <span>Éditer</span>
           </button>
           <button mat-menu-item (click)="deleteProjet(element.id)">
             <mat-icon aria-label="Supression" matTooltip="Supression" matTooltipPosition="after">delete</mat-icon>
