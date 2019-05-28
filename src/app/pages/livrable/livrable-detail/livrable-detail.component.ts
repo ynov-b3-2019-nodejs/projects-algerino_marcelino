@@ -9,7 +9,6 @@ export class LivrableDetailComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

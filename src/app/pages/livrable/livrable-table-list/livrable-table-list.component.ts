@@ -41,7 +41,7 @@ export class LivrableTableListComponent implements OnInit {
           this.isDataLoaded = true;
         });
       }
-    })
+    });
   }
 
   openDialog(livrable: Livrable) {

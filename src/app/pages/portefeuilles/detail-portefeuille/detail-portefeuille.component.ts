@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {PortefeuilleService} from '../../../services/portefeuille.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Portefeuille} from '../../../models/portefeuille';
 import {Projet} from '../../../models/projet';
 import {PageEvent} from '@angular/material/typings/paginator';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {EditPortefeuilleComponent} from '../edit-portefeuille/edit-portefeuille.component';
+import {ProjetDetailComponent} from '../../projet/projet-detail/projet-detail.component';
 
 @Component({
   selector: 'app-detail-portefeuille',
@@ -18,10 +21,15 @@ export class DetailPortefeuilleComponent implements OnInit {
   currentPortefeuille: Portefeuille;
 
   constructor(
+    private snackBar: MatSnackBar,
     private portefeuilleService: PortefeuilleService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
+    private router: Router) {
       this.loadData();
   }
+
+  ngOnInit() { }
 
   loadData() {
     this.dataLoaded = false;
@@ -42,14 +50,21 @@ export class DetailPortefeuilleComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
-
   goToDetail(projectId: number) {
-
+    this.router.navigate([`/projet/${projectId}`]);
   }
 
   editDialog(project: Projet) {
+    const dialogRef = this.dialog.open(ProjetDetailComponent);
 
+    dialogRef.componentInstance.getCurrentPortefeuille();
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadData();
+        this.snackBar.open(`Projet modifié avec succès !`, 'Ok', {duration: 3000});
+      }
+    });
   }
 
   deleteLine(projectId: number) {
