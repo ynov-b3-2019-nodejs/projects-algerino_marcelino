@@ -36,6 +36,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { CalendrierEventDetailsComponent } from './pages/calendrier/calendrier-event-details/calendrier-event-details.component';
 
 
 // the second parameter 'fr' is optional
@@ -58,6 +59,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     ProjetDetailComponent,
     CalendrierEventListComponent,
     CalendrierEventFormComponent,
+    CalendrierEventDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent, CalendrierEventFormComponent],
+  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent, CalendrierEventFormComponent, CalendrierEventDetailsComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {

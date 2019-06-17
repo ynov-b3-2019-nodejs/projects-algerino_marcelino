@@ -52,5 +52,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Annuler</button>
-  <button mat-button (click)="saveEvent()">Créer</button>
+  <button mat-button *ngIf="action === 'create'" (click)="saveEvent()">Créer</button>
+  <button mat-button *ngIf="action === 'edit'" (click)="saveEvent()">Editer</button>
 </mat-dialog-actions>

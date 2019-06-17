@@ -1,45 +1,45 @@
 <div *ngIf="isDataLoaded">
-<mat-toolbar color="primary" style="margin-bottom: 1rem">
-  <mat-toolbar-row>
-    <div class="button-row">
-      <button mat-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
-        <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">navigate_before</mat-icon>
-      </button>
-      <button mat-icon-button mwlCalendarToday [(viewDate)]="viewDate">
-        <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">calendar_today</mat-icon>
-      </button>
-      <button mat-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-        <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">navigate_next</mat-icon>
-      </button>
-    </div>
-    <span class="spacer"></span>
-    <div class="col-md-4">
-      <h3>
-        {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
-      </h3>
-    </div>
-    <span class="spacer"></span>
-    <div class="button-row">
-      <button mat-raised-button color="primary" (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week">Semaine</button>
-      <button mat-raised-button color="primary" (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day">Jour</button>
-      <button (click)="openDialog(null)" mat-icon-button aria-label="Ajouter un événement">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+  <mat-toolbar color="primary" style="margin-bottom: 1rem">
+    <mat-toolbar-row>
+      <div class="button-row">
+        <button mat-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+          <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">navigate_before</mat-icon>
+        </button>
+        <button mat-icon-button mwlCalendarToday [(viewDate)]="viewDate">
+          <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">calendar_today</mat-icon>
+        </button>
+        <button mat-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+          <mat-icon color="secondary" aria-label="Example icon-button with a heart icon">navigate_next</mat-icon>
+        </button>
+      </div>
+      <span class="spacer"></span>
+      <div class="col-md-4">
+        <h3>
+          {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
+        </h3>
+      </div>
+      <span class="spacer"></span>
+      <div class="button-row">
+        <button mat-raised-button color="primary" (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week">Semaine</button>
+        <button mat-raised-button color="primary" (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day">Jour</button>
+        <button (click)="openDialog(null)" mat-icon-button aria-label="Ajouter un événement">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<div [ngSwitch]="view">
-  <mwl-calendar-week-view *ngSwitchCase="'week'"  [viewDate]="viewDate" [events]="events" [locale]="locale"
-    [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays"   [dayStartHour]="7"
-  [dayEndHour]="19">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [locale]="locale" [dayStartHour]="7"
-  [dayEndHour]="19">
-  </mwl-calendar-day-view>
-</div>
+  <div [ngSwitch]="view">
+    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [locale]="locale"
+      [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (eventClicked)="eventClicked($event)" [dayStartHour]="7"
+      [dayEndHour]="19">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="'day'" (eventClicked)="eventClicked($event)" [viewDate]="viewDate"
+      [events]="events" [locale]="locale" [dayStartHour]="7" [dayEndHour]="19">
+    </mwl-calendar-day-view>
+  </div>
 </div>
 
 <div *ngIf="!isDataLoaded" class="loader">

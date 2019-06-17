@@ -48,7 +48,33 @@ export class EventService {
 * ```
 */
   update(event: Event) {
-    return this.http.post(environment.url + this.entityUrl, event);
+    return this.http.patch(environment.url + this.entityUrl, event);
+  }
+
+  /**
+* SERVICES :  Création d'un projet
+* @param Event  - Passe en paramétre l'objet Event
+*
+* Exemple :
+* ```typescript
+* this.EventService.create(new Event()).subscribe(data => {});
+* ```
+*/
+  getById(id: number) {
+    return this.http.get(environment.url + this.entityUrl + "/" + id);
+  }
+
+  /**
+* SERVICES :  Création d'un projet
+* @param Event  - Passe en paramétre l'objet Event
+*
+* Exemple :
+* ```typescript
+* this.EventService.create(new Event()).subscribe(data => {});
+* ```
+*/
+  delete(id: number) {
+    return this.http.delete(environment.url + this.entityUrl + "/" + id);
   }
 
 

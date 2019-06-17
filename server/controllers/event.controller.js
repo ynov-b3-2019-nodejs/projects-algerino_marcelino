@@ -5,7 +5,9 @@ const Projet = require('../models/sequelize/projet');
 module.exports = {
   list,
   insert,
-  update
+  update,
+  detail,
+  destroy
 };
 
 async function list() {
@@ -19,5 +21,16 @@ async function insert(entity) {
 async function update(entity) {
   return await Entity.update(entity, { where: { id: entity.id } });
 }
+
+async function detail(eventId) {
+  return await Entity.findOne({
+    where: { id: eventId },
+    include: [Projet] });
+}
+
+async function destroy(id) {
+  return await Entity.destroy({ where: { id: id } });
+}
+
 
 

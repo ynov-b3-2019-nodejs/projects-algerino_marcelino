@@ -1,3 +1,4 @@
+import { CalendrierEventDetailsComponent } from './../calendrier-event-details/calendrier-event-details.component';
 import { Event } from './../../../models/event';
 import { EventService } from './../../../services/event.service';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
@@ -56,7 +57,7 @@ export class CalendrierEventListComponent implements OnInit {
   isDataLoaded: boolean;
   refresh: Subject<any> = new Subject();
 
-  constructor(private snackBar: MatSnackBar,@Inject(DOCUMENT) private document, private eventService: EventService, public dialog: MatDialog ) { }
+  constructor(private snackBar: MatSnackBar, @Inject(DOCUMENT) private document, private eventService: EventService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -75,6 +76,7 @@ export class CalendrierEventListComponent implements OnInit {
     this.eventService.list().subscribe((datas: Array<Event>) => {
       datas.forEach(event => {
         this.events.push({
+          id: event.id,
           title: event.titre,
           start: addHours(new Date(event.datedebut), 0),
           end: addHours(new Date(event.datefin), 0),
@@ -97,12 +99,18 @@ export class CalendrierEventListComponent implements OnInit {
     dialogRef.componentInstance.onDataEvent(event)
 
     dialogRef.afterClosed().subscribe((result: Event) => {
-      if(!result){
+      if (!result) {
         return false
       }
       this.snackBar.open('Portefeuille ' + result.titre + ' créé !', 'Effacer', { duration: 5000 });
       this.loadData();
     });
+  }
+
+  eventClicked({ event }: { event: CalendarEvent }): void {
+    const dialogRef = this.dialog.open(CalendrierEventDetailsComponent);
+
+    dialogRef.componentInstance.onLoadEvent(Number(event.id))
   }
 
 }

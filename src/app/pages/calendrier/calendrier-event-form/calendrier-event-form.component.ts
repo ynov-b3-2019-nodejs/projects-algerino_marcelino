@@ -98,7 +98,7 @@ export class CalendrierEventFormComponent implements OnInit {
         });
       }
       if (this.action == 'edit') {
-        this.eventService.update(new Event(this.eventForm.controls.titre.value, this.eventForm.controls.datedebut.value, this.eventForm.controls.datefin.value, this.eventForm.controls.projetId.value, this.eventForm.controls.projetId.id)).subscribe(data => {
+        this.eventService.update(new Event(this.eventForm.controls.titre.value, this.eventForm.controls.datedebut.value, this.eventForm.controls.datefin.value, this.eventForm.controls.projetId.value, this.eventForm.controls.id.value)).subscribe(data => {
           this.dialogRef.close(data);
         });
       }
