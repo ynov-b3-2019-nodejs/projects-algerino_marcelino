@@ -85,7 +85,6 @@ export class ProjetService {
 
 
   count(portefeuilleId: number) {
-    console.log('portefeuilleId ==>', portefeuilleId);
     return this.http.get<number>(environment.url + this.entityUrl + '/count?prid=' + portefeuilleId);
   }
 }

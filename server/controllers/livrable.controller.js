@@ -20,7 +20,16 @@ async function update(entity) {
 }
 
 async function destroy(id) {
-  return await Entity.destroy({where: {id: id}});
+  return await entity.update(
+      {
+        archived: true
+      },
+      {
+        where: {
+          id
+        }
+      }
+    )
 }
 
 async function get(id) {

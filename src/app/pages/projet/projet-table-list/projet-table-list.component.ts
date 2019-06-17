@@ -37,7 +37,6 @@ export class ProjetTableListComponent implements OnInit {
     );
 
     this.projetService.list(this.portefeuilleId, this.page, this.limit).subscribe((datas: Array<Projet>) => {
-      console.log('datas ==>', datas);
       this.projet = new MatTableDataSource<Projet>(datas);
       this.isDataLoaded = true;
     });

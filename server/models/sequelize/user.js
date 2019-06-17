@@ -3,6 +3,7 @@ const sequelize = require('../../config/sequelize');
 const Role = require('./roles');
 
 const User = sequelize.define('User', {
+  "archived": Sequelize.BOOLEAN,
   "email": Sequelize.STRING,
   "fullname": Sequelize.STRING,
   "hashedPassword": Sequelize.STRING,
