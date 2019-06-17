@@ -16,7 +16,7 @@ export class ProjetTableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'statut', 'portefeuille', 'action'];
   projet: MatTableDataSource<Projet>;
 
-  portefeuilleId = -1;
+  portefeuilleId = null;
   limit = 5;
   page = 0;
   numberOfElements: number;
@@ -37,6 +37,7 @@ export class ProjetTableListComponent implements OnInit {
     );
 
     this.projetService.list(this.portefeuilleId, this.page, this.limit).subscribe((datas: Array<Projet>) => {
+      console.log('datas ==>', datas);
       this.projet = new MatTableDataSource<Projet>(datas);
       this.isDataLoaded = true;
     });

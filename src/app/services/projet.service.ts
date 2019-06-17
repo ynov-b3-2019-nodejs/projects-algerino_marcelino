@@ -67,7 +67,6 @@ export class ProjetService {
   * ```
   */
   delete(id: number) {
-    const road = environment.url + this.entityUrl + '/' + id;
     return this.http.delete(environment.url + this.entityUrl + '/' + id);
   }
 
@@ -86,6 +85,7 @@ export class ProjetService {
 
 
   count(portefeuilleId: number) {
+    console.log('portefeuilleId ==>', portefeuilleId);
     return this.http.get<number>(environment.url + this.entityUrl + '/count?prid=' + portefeuilleId);
   }
 }

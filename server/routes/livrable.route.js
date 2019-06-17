@@ -6,9 +6,6 @@ const EntityController = require('../controllers/livrable.controller');
 const router = express.Router();
 module.exports = router;
 
-
-
-
 router.get('/count', asyncHandler(count));
 async function count(req, res) {
   res.send(200, await EntityController.count(req.query.prid));
