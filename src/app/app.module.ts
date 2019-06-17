@@ -40,6 +40,7 @@ import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
 
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { ChatComponent } from './commons/component/chat/chat.component';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -61,6 +62,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     FormLivrableComponent,
     LivrableDetailComponent,
     ProjetDetailComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

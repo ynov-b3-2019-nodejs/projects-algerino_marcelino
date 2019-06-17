@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription;
   public user: User;
 
+  isCommentOpen = false;
+
   constructor(
     private authService: AuthService,
     private calendarSocketService: CalendarSocketService,
@@ -46,15 +48,6 @@ export class AppComponent implements OnInit {
     this.userSubscription = this.authService.getUser().subscribe((user: User) => {
       this.user = user;
     });
-
-    this.calendarSocketService.AddCalendarChangeEvent(() => {
-      console.log('reload');
-      console.warn(this.user.fullname);
-    });
-    setInterval(() => {
-      console.log('Hello World !');
-      this.calendarSocketService.SendCalendarChangeEvent();
-    }, 5000);
   }
 
   logout(): void {
@@ -74,6 +67,8 @@ export class AppComponent implements OnInit {
 
   registerSvgIcons() {
     [
+      'arrow_down',
+      'arrow_up',
       'close',
       'add',
       'add-blue',

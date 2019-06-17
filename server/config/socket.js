@@ -18,6 +18,11 @@ io.on('connection', function (socket) {
   socket.on('calendar-update', function () {
     io.emit('calendar-changed', {for: 'everyone'});
   });
+
+  socket.on('msg-send', function (msgJson) {
+    io.emit('msg-received', msgJson, {for: 'everyone'});
+  });
+
 });
 
 server.listen(config.socketPort, function () {
