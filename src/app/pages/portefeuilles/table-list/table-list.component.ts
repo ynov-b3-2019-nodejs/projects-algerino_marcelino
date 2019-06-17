@@ -9,7 +9,7 @@ import {User} from '../../../models/user.model';
 @Component({
   selector: 'app-portefeuille-table-list',
   templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.scss']
+  styleUrls: ['./table-list.component.scss'],
 })
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut'];
@@ -42,7 +42,7 @@ export class TableListComponent implements OnInit {
         data.updatedAt = new Date(Date.parse(Date()));
       }
       this.portefeuille = new MatTableDataSource<Portefeuille>(datas);
-      this.portefeuille.paginator = this.paginator;
+      // this.portefeuille.paginator = this.paginator;
       this.isDataLoaded = true;
     });
   }

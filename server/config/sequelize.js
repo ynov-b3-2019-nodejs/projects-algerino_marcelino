@@ -3,15 +3,18 @@ const config = require('./config');
 
 
 // Option 1: Passing parameters separately
-const sequelize = new Sequelize(config.sequelize.db, config.sequelize.usr, '', {
-  host: 'localhost',
-  dialect: 'mysql',
-  define: {
-    charset: 'utf8',
-    collate: 'utf8_general_ci'
-  }
+const sequelize = new Sequelize(
+  config.sequelize.db, 
+  config.sequelize.usr, 
+  config.sequelize.pwd ? config.sequelize.pwd : '',
+  {
+    host: config.sequelize.url,
+    dialect: 'mysql',
+    define: {
+      charset: 'utf8',
+      collate: 'utf8_general_ci'
+    }
 });
-
 
 sequelize
   .authenticate()

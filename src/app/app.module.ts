@@ -16,14 +16,33 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
 import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule} from '@angular/material';
+import {UserListComponent} from './pages/admin/user/user-list/user-list.component';
+import {PopupUserCreateComponent} from './pages/admin/user/popup-user-create/popup-user-create.component';
+import {YesNoPopupComponent} from './commons/component/yes-no-popup/yes-no-popup.component';
+import {
+  MatDialogModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatTooltipModule, MatPaginatorIntl
+} from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {FormPortefeuilleComponent} from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import {ProjetTableListComponent} from './pages/projet/projet-table-list/projet-table-list.component';
-import {UserListComponent} from './pages/admin/user/user-list/user-list.component';
-import {PopupUserCreateComponent} from './pages/admin/user/popup-user-create/popup-user-create.component';
-import {YesNoPopupComponent} from './commons/component/yes-no-popup/yes-no-popup.component';
+import {FormProjetComponent} from './pages/projet/form-projet/form-projet.component';
+import {ProjetDetailComponent} from './pages/projet/projet-detail/projet-detail.component';
+import {LivrableTableListComponent} from './pages/livrable/livrable-table-list/livrable-table-list.component';
+import {FormLivrableComponent} from './pages/livrable/form-livrable/form-livrable.component';
+import {LivrableDetailComponent} from './pages/livrable/livrable-detail/livrable-detail.component';
+import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
+
+
+import {registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -37,6 +56,11 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     ProjetTableListComponent,
     UserListComponent,
     YesNoPopupComponent,
+    FormProjetComponent,
+    LivrableTableListComponent,
+    FormLivrableComponent,
+    LivrableDetailComponent,
+    ProjetDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +78,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     }),
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatTooltipModule,
+    MatTooltipModule
   ],
   providers: [
     {
@@ -69,10 +93,15 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     {
       provide: LOCALE_ID,
       useValue: 'fr'
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent],
+  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent, FormProjetComponent, FormLivrableComponent],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {
 }
