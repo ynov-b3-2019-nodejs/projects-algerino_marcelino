@@ -12,11 +12,13 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const routes = require('../routes/index.route');
 const config = require('./config');
+const socket = require('./socket');
 const passport = require('./passport');
 
 const sequelizeSync = require('./sequelize-sync');
 
 const app = express();
+
 
 if (config.env === 'development') {
   app.use(logger('dev'));
@@ -31,14 +33,14 @@ if (config.frontend == 'react') {
 }
 
 // 
-app.use(express.static(path.join(__dirname, distDir)))
+app.use(express.static(path.join(__dirname, distDir)));
 app.use(/^((?!(api)).)*/, (req, res) => {
   res.sendFile(path.join(__dirname, distDir + '/index.html'));
 });
 
 console.log(distDir);
 //React server
-app.use(express.static(path.join(__dirname, '../../node_modules/material-dashboard-react/dist')))
+app.use(express.static(path.join(__dirname, '../../node_modules/material-dashboard-react/dist')));
 app.use(/^((?!(api)).)*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
@@ -66,7 +68,7 @@ app.use('/api/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new httpError(404)
+  const err = new httpError(404);
   return next(err);
 });
 
@@ -83,12 +85,6 @@ app.use((err, req, res, next) => {
     message: err.message
   });
   next(err);
-});
-
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-io.on('connection', function(socket){
-  console.log('a user connected');
 });
 
 module.exports = app;
