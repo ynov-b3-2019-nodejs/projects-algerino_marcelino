@@ -14,7 +14,7 @@ import {User} from '../../../models/user.model';
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut'];
   portefeuille: MatTableDataSource<Portefeuille>;
-  user;
+  user: User;
 
   isDataLoaded = false;
 
@@ -26,7 +26,6 @@ export class TableListComponent implements OnInit {
     private authService: AuthService,
     public dialog: MatDialog) {
     authService.getUser().subscribe((currentUser: User) => {
-      console.log(currentUser);
       this.user = currentUser;
     });
   }

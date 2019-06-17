@@ -16,11 +16,14 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
 import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
+import {MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule} from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
-import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';
+import {FormPortefeuilleComponent} from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
+import {ProjetTableListComponent} from './pages/projet/projet-table-list/projet-table-list.component';
+import {UserListComponent} from './pages/admin/user/user-list/user-list.component';
+import {PopupUserCreateComponent} from './pages/admin/user/popup-user-create/popup-user-create.component';
+import {YesNoPopupComponent} from './commons/component/yes-no-popup/yes-no-popup.component';
 
 const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -32,6 +35,8 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     TableListComponent,
     FormPortefeuilleComponent,
     ProjetTableListComponent,
+    UserListComponent,
+    YesNoPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     }),
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
   providers: [
     {
@@ -65,7 +71,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: 'fr'
     }
   ],
-  entryComponents: [FormPortefeuilleComponent],
+  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {

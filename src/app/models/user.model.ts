@@ -7,42 +7,48 @@ export class User {
   public fullname: String;
   public hashedPassword: String;
   public id: Number;
-  public isAdmin: Boolean;
   public updatedAt: Date;
 
-  public IsAdmin() {
-    for (const role of this.Roles) {
-      if (role.code === 'admin') {
-        return true;
-      }
-    }
-    return false;
-  }
 
-  public IsRPor() {
-    for (const role of this.Roles) {
-      if (role.code === 'RPor') {
-        return true;
-      }
-    }
-    return false;
+  constructor(Roles: Array<Role>, email: String, fullname: String) {
+    this.Roles = Roles;
+    this.email = email;
+    this.fullname = fullname;
   }
+}
 
-  public IsRPro() {
-    for (const role of this.Roles) {
-      if (role.code === 'RPro') {
-        return true;
-      }
+export function isAdmin(user: User) {
+  for (const role of user.Roles) {
+    if (role.code === 'admin') {
+      return true;
     }
-    return false;
   }
+  return false;
+}
 
-  public IsRLiv() {
-    for (const role of this.Roles) {
-      if (role.code === 'RLiv') {
-        return true;
-      }
+export function IsRPor(user: User) {
+  for (const role of user.Roles) {
+    if (role.code === 'RPor') {
+      return true;
     }
-    return false;
   }
+  return false;
+}
+
+export function IsRPro(user: User) {
+  for (const role of user.Roles) {
+    if (role.code === 'RPro') {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function IsRLiv(user: User) {
+  for (const role of user.Roles) {
+    if (role.code === 'RLiv') {
+      return true;
+    }
+  }
+  return false;
 }

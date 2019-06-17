@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient, private token: TokenStorage) {
   }
 
-  public $userSource = new Subject<any>();
+  public $userSource = new Subject<User>();
 
   login(email: string, password: string): Observable<any> {
     return Observable.create(observer => {
@@ -47,9 +47,6 @@ export class AuthService {
   }
 
   setUser(user: User): void {
-    if (user) {
-      user.isAdmin = false; // (user.roles.indexOf('admin') > -1);
-    }
     this.$userSource.next(user);
     (<any>window).user = user;
   }
