@@ -85,14 +85,10 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-var server = require('http').createServer(app);
-// Chargement de socket.io
-var io = require('socket.io').listen(server);
-
-// Quand un client se connecte, on le note dans la console
-io.sockets.on('connection', function (socket) {
-  console.log('Un client est connecté !');
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
-
 
 module.exports = app;
