@@ -1,3 +1,56 @@
-<p>
-  calendrier-event-form works!
-</p>
+<h2 *ngIf="action === 'create'" mat-dialog-title>Créer un événement</h2>
+<h2 *ngIf="action === 'edit'" mat-dialog-title>Editer votre événement</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="eventForm" (submit)="saveEvent()" class="container-field">
+
+    <mat-form-field>
+      <input formControlName="titre" id="titre" matInput placeholder="Titre" required>
+      <mat-error *ngIf="!eventForm.controls.titre.valid">Le titre est requis</mat-error>
+    </mat-form-field>
+
+    <mat-toolbar-row>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker_dateprevue" placeholder="Date de début" formControlName="datedebut"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="picker_dateprevue"></mat-datepicker-toggle>
+        <mat-datepicker #picker_dateprevue></mat-datepicker>
+        <mat-error *ngIf="!eventForm.controls.datedebut.valid">Une date de début est obligatoire</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="pickerDate">
+        <input matInput type="time" formControlName="heureStart" required>
+        <mat-error *ngIf="!eventForm.controls.heureStart.valid">Une heure de début est obligatoire</mat-error>
+      </mat-form-field>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker_datefin" placeholder="Date de fin" formControlName="datefin" required>
+        <mat-datepicker-toggle matSuffix [for]="picker_datefin"></mat-datepicker-toggle>
+        <mat-datepicker #picker_datefin></mat-datepicker>
+        <mat-error *ngIf="!eventForm.controls.datefin.valid">Une date de fin est obligatoire</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="pickerDate">
+        <input matInput type="time" formControlName="heureEnd" required>
+        <mat-error *ngIf="!eventForm.controls.heureEnd.valid">Une heure de fin est obligatoire</mat-error>
+      </mat-form-field>
+    </mat-toolbar-row>
+
+
+    <mat-form-field>
+      <mat-label>Vos Projets</mat-label>
+      <mat-select formControlName="projetId" id="projetId" required>
+        <mat-option *ngFor="let projet of projets" [value]="projet.id">
+          {{projet.nom}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!eventForm.controls.projetId.valid">Un projet est requis</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button (click)="saveEvent()">Créer</button>
+</mat-dialog-actions>

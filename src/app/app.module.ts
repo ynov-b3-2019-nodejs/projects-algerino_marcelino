@@ -100,7 +100,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent],
+  entryComponents: [FormPortefeuilleComponent, FormProjetComponent, FormLivrableComponent, CalendrierEventFormComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -19,6 +19,7 @@ const Projet = require('../models/sequelize/projet');
 const User = require('../models/sequelize/user');
 const Livrable = require('../models/sequelize/livrable');
 const Statut = require('../models/sequelize/statut');
+const Event = require('../models/sequelize/event');
 
 Portefeuille.hasMany(Projet);
 Projet.belongsTo(Portefeuille);
@@ -34,6 +35,14 @@ Projet.belongsTo(Statut);
 
 Statut.hasMany(Livrable);
 Livrable.belongsTo(Statut);
+
+Projet.hasMany(Event);
+Event.belongsTo(Projet);
+
+Event.belongsToMany(User, {
+  through: 'UserEvent',
+  foreignKey: 'eventId'
+});
 
 Portefeuille.belongsToMany(User, {
   through: 'UserPortefeuille',
@@ -54,12 +63,15 @@ User.belongsToMany(Projet, {
   through: 'UserProject',
   foreignKey: 'userId'
 });
+
+
 (async function () {
   await Statut.sync();
   await User.sync();
   await Portefeuille.sync();
   await Projet.sync();
   await Livrable.sync();
+  await Event.sync();
 })();
 const statuts = [
   {
@@ -139,7 +151,7 @@ if (config.frontend == 'react') {
   distDir = '../../dist/';
 }
 
-// 
+//
 app.use(express.static(path.join(__dirname, distDir)))
 app.use(/^((?!(api)).)*/, (req, res) => {
   res.sendFile(path.join(__dirname, distDir + '/index.html'));
