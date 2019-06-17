@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { MatIconRegistry } from "@angular/material";
-import { DomSanitizer } from "@angular/platform-browser";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
-import { AuthService } from './auth/auth.service';
+import {AuthService} from './services/auth.service';
 import * as schema from './schema/equipment.json';
+import {User, isAdmin} from './models/user.model';
+import {Role} from './models/role.model';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ import * as schema from './schema/equipment.json';
 export class AppComponent implements OnInit {
 
   private userSubscription: Subscription;
-  public user: any;
+  public user: User;
 
   constructor(
     private authService: AuthService,
@@ -24,18 +26,18 @@ export class AppComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry
   ) {
-    this.registerSvgIcons()
+    this.registerSvgIcons();
   }
 
   public ngOnInit() {
 
     // init this.user on startup
-    this.authService.me().subscribe(data => {
-      this.user = data.user;
+    this.authService.me().subscribe((data: any) => {
+      // none
     });
 
     // update this.user after login/register/logout
-    this.userSubscription = this.authService.$userSource.subscribe((user) => {
+    this.userSubscription = this.authService.getUser().subscribe((user: User) => {
       this.user = user;
     });
   }
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit {
     this.router.navigate([link]);
   }
 
-  ngOnDestroy() { 
+  ngOnDestroy() {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
@@ -90,7 +92,7 @@ export class AppComponent implements OnInit {
       'trolleybus',
       'water-transportation',
     ].forEach((icon) => {
-      this.matIconRegistry.addSvgIcon(icon, this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${icon}.svg`))
+      this.matIconRegistry.addSvgIcon(icon, this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/${icon}.svg`));
     });
   }
 

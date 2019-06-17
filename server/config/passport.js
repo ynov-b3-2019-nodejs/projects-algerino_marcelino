@@ -4,13 +4,14 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const bcrypt = require('bcrypt');
 
+const RolesSeq = require('../models/sequelize/roles');
 const UserSeq = require('../models/sequelize/user');
 const config = require('./config');
 
 const localLogin = new LocalStrategy({
   usernameField: 'email'
 }, async (email, password, done) => {
-  let user = await UserSeq.findOne({where:{email}});
+  let user = await UserSeq.findOne({where:{email}, include:[RolesSeq]});
   if (!user || !bcrypt.compareSync(password, user.hashedPassword)) {
     return done(null, false, {error: 'Your login details could not be verified. Please try again.'});
   }
@@ -18,12 +19,12 @@ const localLogin = new LocalStrategy({
   done(null, user);
 });
 
+
 const jwtLogin = new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: config.jwtSecret
 }, async (payload, done) => {
-  console.log("payload : ", payload);
-  let user = await UserSeq.findOne({where:{email: payload.email}});
+  let user = await UserSeq.findOne({where:{email: payload.email}, include:[RolesSeq]});
   if (!user) {
     return done(null, false);
   }

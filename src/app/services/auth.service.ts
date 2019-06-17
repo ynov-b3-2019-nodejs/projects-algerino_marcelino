@@ -3,8 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
-import {TokenStorage} from './token.storage';
+import {TokenStorage} from '../auth/token.storage';
 import {environment} from '../../environments/environment';
+import {User} from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient, private token: TokenStorage) {
   }
 
-  public $userSource = new Subject<any>();
+  public $userSource = new Subject<User>();
 
   login(email: string, password: string): Observable<any> {
     return Observable.create(observer => {
@@ -44,15 +45,12 @@ export class AuthService {
     });
   }
 
-  setUser(user): void {
-    if (user) {
-      user.isAdmin = false; // (user.roles.indexOf('admin') > -1);
-    }
+  setUser(user: User): void {
     this.$userSource.next(user);
     (<any>window).user = user;
   }
 
-  getUser(): Observable<any> {
+  getUser(): Observable<User> {
     return this.$userSource.asObservable();
   }
 

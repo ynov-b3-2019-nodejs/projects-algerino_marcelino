@@ -14,116 +14,7 @@ const routes = require('../routes/index.route');
 const config = require('./config');
 const passport = require('./passport');
 
-const Portefeuille = require('../models/sequelize/portefeuille');
-const Projet = require('../models/sequelize/projet');
-const User = require('../models/sequelize/user');
-const Livrable = require('../models/sequelize/livrable');
-const Statut = require('../models/sequelize/statut');
-
-Portefeuille.hasMany(Projet);
-Projet.belongsTo(Portefeuille);
-
-Projet.hasMany(Livrable);
-Livrable.belongsTo(Projet);
-
-Statut.hasMany(Portefeuille);
-Portefeuille.belongsTo(Statut);
-
-Statut.hasMany(Projet);
-Projet.belongsTo(Statut);
-
-Statut.hasMany(Livrable);
-Livrable.belongsTo(Statut);
-
-Portefeuille.belongsToMany(User, {
-  through: 'UserPortefeuille',
-  foreignKey: 'portefeuilleId'
-});
-
-User.belongsToMany(Portefeuille, {
-  through: 'UserPortefeuille',
-  foreignKey: 'userId'
-});
-
-Projet.belongsToMany(User, {
-  through: 'UserProject',
-  foreignKey: 'projetId'
-});
-
-User.belongsToMany(Projet, {
-  through: 'UserProject',
-  foreignKey: 'userId'
-});
-(async function () {
-  await Statut.sync();
-  await User.sync();
-  await Portefeuille.sync();
-  await Projet.sync();
-  await Livrable.sync();
-})();
-const statuts = [
-  {
-    nom: "Clarification",
-    code: "Clarification"
-  },
-  {
-    nom: "Abandonné",
-    code: "Abandoned"
-  },
-  {
-    nom: "Clos",
-    code: "Closed"
-  },
-  {
-    nom: "En cours",
-    code: "InProgress"
-  },
-  {
-    nom: "A débuter",
-    code: "ToBeStarted"
-  },
-  {
-    nom: "GO",
-    code: "Go"
-  },
-  {
-    nom: "NO GO",
-    code: "NoGo"
-  },
-  {
-    nom: "En attente de validation",
-    code: "AwaitingValidation"
-  },
-  {
-    nom: "Commande à réaliser",
-    code: "OrderToBeCarriedOut"
-  },
-];
-
-(async function (statuts, Statut) {
-  for (let statut of statuts) {
-    const statutInDb = await Statut.findOne({where: {code: statut.code}});
-    if (statutInDb === null) {
-      Statut.create(statut);
-    }
-  }
-})(statuts, Statut);
-(async function (Portefeuille) {
-  const portefeuilles = [
-    {
-      nom: "TEST 1"
-    },
-    {
-      nom: "TEST 2"
-    }
-  ];
-  for (let portefeuille of portefeuilles) {
-    const portefeuilleInDb = await Portefeuille.findOne({where: {nom: portefeuille.nom}});
-    if (portefeuilleInDb === null) {
-      Portefeuille.create(portefeuille);
-    }
-  }
-})(Portefeuille);
+const sequelizeSync = require('./sequelize-sync');
 
 const app = express();
 
@@ -192,6 +83,12 @@ app.use((err, req, res, next) => {
     message: err.message
   });
   next(err);
+});
+
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
 
 module.exports = app;

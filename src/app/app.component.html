@@ -1,5 +1,12 @@
 <app-header [user]="user"></app-header>
-<div class="wrapper-app">
-  <router-outlet></router-outlet>
+<div class="main-page">
+  <div class="left-menu">
+    <a class="menu-link" routerLink="/portefeuille">Liste des Portefeuilles</a>
+    <a class="menu-link" routerLink="/admin/user">Liste des Utilisateurs</a>
+    <a class="menu-link" routerLink="/admin">Administration</a>
+  </div>
+  <div class="wrapper-app">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
