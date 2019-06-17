@@ -24,12 +24,9 @@ import {
   MatTooltipModule,
   MatPaginatorIntl
 } from '@angular/material';
-import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import { MatDialogModule, MatPaginatorModule, MatProgressSpinnerModule, MatTableModule, MatTooltipModule, MatPaginatorIntl } from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {EditPortefeuilleComponent } from './pages/portefeuilles/edit-portefeuille/edit-portefeuille.component';
-import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
 import { DetailPortefeuilleComponent } from './pages/portefeuilles/detail-portefeuille/detail-portefeuille.component';
 import { FormPortefeuilleComponent } from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import { ProjetTableListComponent } from './pages/projet/projet-table-list/projet-table-list.component';

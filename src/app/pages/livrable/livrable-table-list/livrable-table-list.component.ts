@@ -27,12 +27,12 @@ export class LivrableTableListComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, private livrableService: LivrableService, public dialog: MatDialog) { }
 
-  ngOnInit() { this.loadData() }
+  ngOnInit() { this.loadData(); }
 
   loadData() {
     this.isDataLoaded = false;
 
-    this.livrableService.count().subscribe(
+    this.livrableService.count(this.projetId).subscribe(
       (occurrences) => this.numberOfElements = occurrences
     );
 

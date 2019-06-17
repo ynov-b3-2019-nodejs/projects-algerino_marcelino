@@ -5,8 +5,8 @@ import {Portefeuille} from '../../../models/portefeuille';
 import {Projet} from '../../../models/projet';
 import {PageEvent} from '@angular/material/typings/paginator';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {EditPortefeuilleComponent} from '../edit-portefeuille/edit-portefeuille.component';
-import {ProjetDetailComponent} from '../../projet/projet-detail/projet-detail.component';
+import {FormProjetComponent} from '../../projet/form-projet/form-projet.component';
+import {ProjetService} from '../../../services/projet.service';
 
 @Component({
   selector: 'app-detail-portefeuille',
@@ -19,10 +19,12 @@ export class DetailPortefeuilleComponent implements OnInit {
   page = 0;
   dataLoaded = false;
   currentPortefeuille: Portefeuille;
+  displayedProjects: Projet[];
 
   constructor(
     private snackBar: MatSnackBar,
     private portefeuilleService: PortefeuilleService,
+    private projetService: ProjetService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router) {
@@ -44,20 +46,26 @@ export class DetailPortefeuilleComponent implements OnInit {
             updatedAt: new Date(p.updatedAt)
           };
         });
+        this.currentPortefeuille.updatedAt = new Date(this.currentPortefeuille.updatedAt);
+        this.currentPortefeuille.createdAt = new Date(this.currentPortefeuille.createdAt);
+
+        this.displayedProjects = this.currentPortefeuille.Projets.slice(
+          this.page * this.limit,
+          (this.page * this.limit) + this.limit);
         this.dataLoaded = true;
       });
     });
 
   }
 
-  goToDetail(projectId: number) {
-    this.router.navigate([`/projet/${projectId}`]);
+  handleReturn() {
+    this.router.navigate(['/portefeuille']);
   }
 
   editDialog(project: Projet) {
-    const dialogRef = this.dialog.open(ProjetDetailComponent);
+    const dialogRef = this.dialog.open(FormProjetComponent);
 
-    dialogRef.componentInstance.getCurrentPortefeuille();
+    dialogRef.componentInstance.onDataProjet(this.currentPortefeuille.id, project);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -67,8 +75,30 @@ export class DetailPortefeuilleComponent implements OnInit {
     });
   }
 
-  deleteLine(projectId: number) {
+  goToDetail(projectId: number) {
+    this.router.navigate([`/projets/${projectId}`]);
+  }
 
+  deleteLine(projectId: number) {
+    this.projetService.delete(projectId).subscribe(() => {
+      this.loadData();
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(FormProjetComponent);
+
+    dialogRef.componentInstance.action = 'create';
+    dialogRef.componentInstance.onDataProjet(this.currentPortefeuille.id, null);
+
+    dialogRef.afterClosed().subscribe((result: Projet) => {
+      if (result) {
+        result.PortefeuilleId = this.currentPortefeuille.id;
+        this.projetService.create(result);
+        this.snackBar.open(`Le Projet ${result.nom} a été créer avec succès !`, 'Ok', {duration: 3000});
+        this.loadData();
+      }
+    });
   }
 
   pageEvent(event: PageEvent) {

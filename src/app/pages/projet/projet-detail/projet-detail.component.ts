@@ -10,24 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProjetDetailComponent implements OnInit {
 
-  projet: Projet
-  isDataLoaded : boolean
+  projet: Projet;
+  isDataLoaded: boolean;
 
   constructor(private activeRoute: ActivatedRoute, private projetService: ProjetService) { }
 
   ngOnInit() {
-    this.isDataLoaded = false
+    this.isDataLoaded = false;
 
     this.activeRoute.params.subscribe(params => {
       if (params['id']) {
         this.projetService.detail(params['id']).subscribe((data: Projet) => {
 
-         this.projet = data
+         this.projet = data;
 
           this.isDataLoaded = true;
         });
       }
-    })
+    });
   }
 
 }

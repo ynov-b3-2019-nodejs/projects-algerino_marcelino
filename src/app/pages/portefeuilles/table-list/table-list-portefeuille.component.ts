@@ -56,6 +56,8 @@ export class TableListPortefeuilleComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Portefeuille) => {
       if (result) {
         this.snackBar.open(`Le portefeuille ${result.nom} a été créer avec succès !`, 'Ok', {duration: 3000});
+        this.portefeuilleService.create(result);
+        this.loadData();
       }
     });
   }
@@ -67,8 +69,8 @@ export class TableListPortefeuilleComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.loadData();
         this.snackBar.open(`Portefeuille modifié avec succès !`, 'Ok', {duration: 3000});
+        this.loadData();
       }
     });
   }

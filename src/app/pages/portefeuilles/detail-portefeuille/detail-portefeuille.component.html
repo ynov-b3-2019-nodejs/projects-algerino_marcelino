@@ -1,66 +1,97 @@
 <div *ngIf="dataLoaded">
-  <mat-card>
-    <h1>{{ currentPortefeuille.nom }}</h1>
-
-    <h2>Projets : </h2>
-    <table class="table-full-width" mat-table [dataSource]="currentPortefeuille.Projets">
-
-      <ng-container matColumnDef="nom">
-        <th mat-header-cell *matHeaderCellDef> Nom</th>
-        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="updatedAt">
-        <th mat-header-cell *matHeaderCellDef> Date de modification</th>
-        <td mat-cell *matCellDef="let element"> {{element.updatedAt.toLocaleDateString()}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Statut">
-        <th mat-header-cell *matHeaderCellDef> Status</th>
-        <td mat-cell *matCellDef="let element"> {{element.Statut.nom}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon
-              aria-label="Options"
-              matTooltip="Options"
-              matTooltipPosition="after">more_vert</mat-icon>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="goToDetail(element.id)">
-                <mat-icon>apps</mat-icon>
-                <span>Détail</span>
-              </button>
-              <button mat-menu-item (click)="editDialog(element)">
-                <mat-icon >edit</mat-icon>
-                <span>Éditer</span>
-              </button>
-              <button mat-menu-item (click)="deleteLine(element.id)">
-                <mat-icon >delete</mat-icon>
-                <span>Supprimer</span>
-              </button>
-            </mat-menu>
+  <div class="portefeuille-block-container">
+    <mat-card>
+      <mat-toolbar class="title-container">
+        <mat-toolbar-row>
+          <button (click)="handleReturn()"
+                  class="spacerIcon"
+                  mat-icon-button
+                  matTooltip="Retour"
+                  matTooltipPosition="after">
+            <mat-icon aria-label="Retour">reply</mat-icon>
           </button>
-        </td>
-      </ng-container>
+          <mat-card-title class="spacerIcon spacerTitle">Livrable actuel: {{currentPortefeuille.nom}}</mat-card-title>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-card-content>
+        <mat-divider [inset]="true" ></mat-divider>
+        <p>
+          Status : {{ currentPortefeuille.Statut.nom }}
+        </p>
+        <mat-divider [inset]="true" ></mat-divider>
+        <p>
+          Date de création : {{ currentPortefeuille.createdAt.toLocaleDateString() }}
+        </p>
+        <mat-divider [inset]="true" ></mat-divider>
+        <p>
+          Date de modification : {{ currentPortefeuille.updatedAt.toLocaleDateString() }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="portefeuille-block-container">
+    <mat-card>
+      <h2>Projets : </h2>
+      <table class="table-full-width" mat-table [dataSource]="displayedProjects">
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <div class="paginator">
-      <mat-paginator
-        [length]="currentPortefeuille.Projets.length"
-        [pageSize]="limit"
-        [pageIndex]="page"
-        [pageSizeOptions]="[5, 10, 20]"
-        (page)="pageEvent($event)">
-      </mat-paginator>
-      <button (click)="openDialog()" mat-mini-fab color="primary">
-        <mat-icon>add</mat-icon>
-      </button>
-  </mat-card>
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef> Nom</th>
+          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef> Date de modification</th>
+          <td mat-cell *matCellDef="let element"> {{element.updatedAt.toLocaleDateString()}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Statut">
+          <th mat-header-cell *matHeaderCellDef> Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.Statut.nom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon
+                aria-label="Options"
+                matTooltip="Options"
+                matTooltipPosition="after">more_vert</mat-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="goToDetail(element.id)">
+                  <mat-icon>apps</mat-icon>
+                  <span>Détail</span>
+                </button>
+                <button mat-menu-item (click)="editDialog(element)">
+                  <mat-icon >edit</mat-icon>
+                  <span>Éditer</span>
+                </button>
+                <button mat-menu-item (click)="deleteLine(element.id)">
+                  <mat-icon >delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+              </mat-menu>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div class="paginator">
+        <mat-paginator
+          [length]="currentPortefeuille.Projets.length"
+          [pageSize]="limit"
+          [pageIndex]="page"
+          [pageSizeOptions]="[5, 10, 20]"
+          (page)="pageEvent($event)">
+        </mat-paginator>
+        <button (click)="openDialog()" mat-mini-fab color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>
 
 <div *ngIf="!dataLoaded" class="loader">

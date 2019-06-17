@@ -9,6 +9,8 @@ import { ProjetTableListComponent } from './../projet-table-list/projet-table-li
 // SERVICES
 import { StatutService } from '../../../services/statut.service';
 import { ProjetService } from './../../../services/projet.service';
+import {PortefeuilleService} from '../../../services/portefeuille.service';
+import {Portefeuille} from '../../../models/portefeuille';
 
 
 
@@ -23,9 +25,11 @@ export class FormProjetComponent implements OnInit {
   projetForm: FormGroup;
   action: string;
   statuts: [Statut];
+  portefeuilles: [Portefeuille];
 
   constructor(
     private projetService: ProjetService,
+    private portefeuilleService: PortefeuilleService,
     private statutService: StatutService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<ProjetTableListComponent>) { }
@@ -34,21 +38,23 @@ export class FormProjetComponent implements OnInit {
     this.statutService.list().subscribe((datas: [Statut]) => {
       this.statuts = datas;
     });
+    this.portefeuilleService.list(200000, 0).subscribe((datas: [Portefeuille]) => {
+      this.portefeuilles = datas;
+    });
   }
 
   onDataProjet(portefeuilleId: number, projet: Projet) {
 
-    if (projet === null) {
-      this.action = 'create'
+    if (!projet) {
+      this.action = 'create';
 
       this.projetForm = this.fb.group({
         'nom': ['', Validators.required],
         'statutId': ['', Validators.required],
         'portefeuilleId': [portefeuilleId, Validators.required]
       });
-    }
-    else {
-      this.action = 'edit'
+    } else {
+      this.action = 'edit';
 
       this.projetForm = this.fb.group({
         'nom': [projet.nom, Validators.required],
@@ -64,16 +70,23 @@ export class FormProjetComponent implements OnInit {
 
     if (this.projetForm.dirty && this.projetForm.valid) {
 
-      if (this.action == 'create') {
+      if (this.action === 'create') {
         this.projetService.create(
-          new Projet(this.projetForm.controls.nom.value, this.projetForm.controls.statutId.value, this.projetForm.controls.portefeuilleId.value)).subscribe(data => {
+          new Projet(
+              this.projetForm.controls.nom.value,
+              this.projetForm.controls.statutId.value,
+              this.projetForm.controls.portefeuilleId.value)).subscribe(data => {
             this.dialogRef.close(data);
           });
       }
 
-      if (this.action == 'edit') {
+      if (this.action === 'edit') {
         this.projetService.edit(
-          new Projet(this.projetForm.controls.nom.value, this.projetForm.controls.statutId.value, this.projetForm.controls.portefeuilleId.value,this.projetForm.controls.id.value,)).subscribe(data => {
+          new Projet(
+              this.projetForm.controls.nom.value,
+              this.projetForm.controls.statutId.value,
+              this.projetForm.controls.portefeuilleId.value,
+              this.projetForm.controls.id.value, )).subscribe(data => {
             this.dialogRef.close(data);
           });
       }

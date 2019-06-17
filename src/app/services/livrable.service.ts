@@ -79,8 +79,8 @@ export class LivrableService {
   }
 
 
-  count() {
-    return this.http.get<number>(environment.url + this.entityUrl + '/count');
+  count(projetId: number) {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count?prid=' + projetId);
   }
 
 }

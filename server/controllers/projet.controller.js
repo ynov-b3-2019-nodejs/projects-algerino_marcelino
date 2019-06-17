@@ -30,14 +30,23 @@ async function get(id) {
 }
 
 async function list(id, page, limit) {
-  return await Entity.findAll({
-    where  : { portefeuilleId: id },
-    include: [Portefeuille, Statut],
-    limit  : Number(limit),
-    offset : Number(page) * Number(limit)
-  });
+  return id != -1
+    ? await Entity.findAll({
+      where  : { portefeuilleId: id },
+      include: [Portefeuille, Statut],
+      limit  : Number(limit),
+      offset : Number(page) * Number(limit)
+    })
+    : await Entity.findAll({
+        include: [Portefeuille, Statut],
+        limit  : Number(limit),
+        offset : Number(page) * Number(limit)});
 }
 
-async function count() {
-  return await Entity.count();
+async function count(prid) {
+  return prid != -1
+    ? await Entity.count({
+      where: {PortefeuilleId: prid}
+    })
+    : await Entity.count();
 }

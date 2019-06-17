@@ -2,7 +2,6 @@ let Entity = require('../models/sequelize/livrable');
 const Statut = require('../models/sequelize/statut');
 const Projet = require('../models/sequelize/projet');
 
-
 module.exports = {
   insert,
   update,
@@ -36,11 +35,12 @@ async function list(id, page, limit) {
     offset: Number(page) * Number(limit) });
 }
 
-
-async function count() {
-  return await Entity.count();
+async function count(prid) {
+  return prid
+    ? await Entity.count({
+      where: {ProjetId: prid}
+    })
+    : await Entity.count();
 }
-
-
 
 // id	nom	dateprevu	datefin	createdAt	updatedAt	ProjetId	StatutId
