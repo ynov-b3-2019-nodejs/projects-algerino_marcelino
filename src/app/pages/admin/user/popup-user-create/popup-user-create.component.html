@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Créer un Utilisateur</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="userForm" (submit)="saveUser()">
+    <mat-form-field>
+      <input formControlName="fullname" id="fullname" matInput placeholder="Nom Prénom" required>
+      <mat-error *ngIf="!userForm.controls.fullname.valid">Le nom complet est requis</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="email" id="email" matInput placeholder="Email" required>
+      <mat-error *ngIf="!userForm.controls.email.valid">L'email est requis</mat-error>
+    </mat-form-field>
+    <div class="container-6-4" *ngIf="isNew">
+      <mat-form-field>
+        <input [value]="password" formControlName="password" id="password" matInput placeholder="Mot de passe" required>
+        <mat-error *ngIf="!userForm.controls.password.valid">Le mot de passe complet est requis</mat-error>
+      </mat-form-field>
+      <a mat-raised-button (click)="generatePassword()"> Générer un mot de passe </a>
+    </div>
+    <mat-form-field>
+      <mat-label>Roles :</mat-label>
+      <mat-select formControlName="Roles" id="Roles" multiple>
+        <mat-option *ngFor="let role of Roles" [value]="role.id">
+          {{role.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!userForm.controls.Roles.valid">Au moins un role est requis</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button (click)="saveUser()">{{isNew ? 'Créer' : 'Modifier'}}</button>
+</mat-dialog-actions>

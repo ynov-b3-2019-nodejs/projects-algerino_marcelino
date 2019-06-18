@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { AdminComponent } from './admin.component';
-import { OnlyAdminUsersGuard } from './admin-user-guard';
+import {AdminComponent} from './admin.component';
+import {OnlyAdminUsersGuard} from './admin-user-guard';
+import {UserListComponent} from '../pages/admin/user/user-list/user-list.component';
 
 const routes: Routes = [{
   path: 'admin',
@@ -10,6 +11,9 @@ const routes: Routes = [{
   children: [{
     path: '',
     component: AdminComponent,
+  }, {
+    path: 'user',
+    component: UserListComponent,
   }]
 }];
 
@@ -18,4 +22,5 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 
-export class AdminRoutingModule {}
+export class AdminRoutingModule {
+}

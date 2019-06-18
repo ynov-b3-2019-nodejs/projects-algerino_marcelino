@@ -1,12 +1,12 @@
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from '../auth/auth-guard.service';
+import {HomeComponent} from '../home/home.component';
+import {ProjetTableListComponent} from '../pages/projet/projet-table-list/projet-table-list.component';
+import {ProjetDetailComponent} from '../pages/projet/projet-detail/projet-detail.component';
+import {LivrableTableListComponent} from '../pages/livrable/livrable-table-list/livrable-table-list.component';
+import {LivrableDetailComponent} from '../pages/livrable/livrable-detail/livrable-detail.component';
 import { CalendrierEventListComponent } from './../pages/calendrier/calendrier-event-list/calendrier-event-list.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth-guard.service';
-import { HomeComponent } from '../home/home.component';
-import { ProjetTableListComponent } from '../pages/projet/projet-table-list/projet-table-list.component';
-import { ProjetDetailComponent } from '../pages/projet/projet-detail/projet-detail.component';
-import { LivrableTableListComponent } from '../pages/livrable/livrable-table-list/livrable-table-list.component';
-import { LivrableDetailComponent } from '../pages/livrable/livrable-detail/livrable-detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,8 +17,7 @@ const routes: Routes = [{
 }, {
   path: 'projets/:id',
   component: ProjetDetailComponent
-},
-{
+}, {
   path: 'livrables',
   component: LivrableTableListComponent,
 }, {
@@ -34,6 +33,12 @@ const routes: Routes = [{
 }, {
   path: 'admin',
   loadChildren: 'app/admin/admin.module#AdminModule'
+}, {
+  path: 'auth',
+  loadChildren: 'app/auth/auth.module#AuthModule'
+}, {
+  path: 'admin',
+  loadChildren: 'app/admin/admin.module#AdminModule'
 }];
 
 @NgModule({
@@ -43,4 +48,5 @@ const routes: Routes = [{
   declarations: []
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

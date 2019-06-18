@@ -3,6 +3,8 @@ import {PortefeuilleService} from '../../../services/portefeuille.service';
 import {Portefeuille} from '../../../models/portefeuille';
 import {MatDialog, MatPaginatorIntl, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.component';
+import {AuthService} from '../../../services/auth.service';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-portefeuille-table-list',
@@ -12,6 +14,7 @@ import {FormPortefeuilleComponent} from '../form-portefeuille/form-portefeuille.
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'createdAt', 'updatedAt', 'statut'];
   portefeuille: MatTableDataSource<Portefeuille>;
+  user: User;
 
   isDataLoaded = false;
 
@@ -20,7 +23,11 @@ export class TableListComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private portefeuilleService: PortefeuilleService,
+    private authService: AuthService,
     public dialog: MatDialog) {
+    authService.getUser().subscribe((currentUser: User) => {
+      this.user = currentUser;
+    });
   }
 
   ngOnInit() {
