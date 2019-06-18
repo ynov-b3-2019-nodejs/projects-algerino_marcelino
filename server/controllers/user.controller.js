@@ -21,6 +21,11 @@ module.exports = {
 
 async function insert(user) {
   delete user.id;
+  delete user.repeatPassword;
+  console.log(user);
+  if(!user.roles){
+    user.roles = [];
+  }
   user = await Joi.validate(user, userSchema, {abortEarly: false});
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;

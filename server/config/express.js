@@ -32,8 +32,7 @@ if (config.frontend == 'react') {
   distDir = '../../dist/';
 }
 
-// 
-app.use(express.static(path.join(__dirname, distDir)));
+app.use(express.static(path.join(__dirname, distDir)))
 app.use(/^((?!(api)).)*/, (req, res) => {
   res.sendFile(path.join(__dirname, distDir + '/index.html'));
 });
