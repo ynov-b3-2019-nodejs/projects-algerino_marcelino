@@ -16,17 +16,17 @@ async function insert(entity) {
 }
 
 async function update(entity, id) {
-  return await Entity.update(entity, {where: {id: id}});
+  return await Entity.update(entity, {where: {id: id, archived: null}});
 }
 
 async function destroy(id) {
-  return await Entity.destroy({where: {id: id}});
+  return await Entity.update({archived: true}, {where: {id: id}});
 }
 
 async function get(col, val) {
   return await Entity.findOne(
     {
-      where: {[col]: val},
+      where: {[col]: val, archived: null},
       include: [
         Statut,
         {
@@ -42,6 +42,7 @@ async function get(col, val) {
 
 async function list(limit, page) {
   return await Entity.findAll({
+    where: {archived: null},
     include: Statut,
     limit: Number(limit),
     offset: Number(page) * Number(limit)
@@ -49,5 +50,5 @@ async function list(limit, page) {
 }
 
 async function count() {
-  return await Entity.count();
+  return await Entity.count({where: {archived: null}});
 }

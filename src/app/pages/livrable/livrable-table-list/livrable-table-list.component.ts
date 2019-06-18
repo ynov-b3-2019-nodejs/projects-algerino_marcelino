@@ -50,14 +50,14 @@ export class LivrableTableListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: Livrable) => {
       if (result) {
-        this.snackBar.open('Le livrable ' + result.nom + ' à bien étais créé !', 'OK', { duration: 5000 });
+        this.snackBar.open('Le livrable ' + result.nom + ' à bien été créé !', 'OK', { duration: 5000 });
         this.loadData();
       }
     });
   }
 
   deleteProjet(livrableId: number) {
-    this.livrableService.delete(livrableId).subscribe((data) => { this.loadData(); })
+    this.livrableService.delete(livrableId).subscribe((data) => { this.loadData(); });
   }
 
 

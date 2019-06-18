@@ -16,29 +16,20 @@ async function insert(entity) {
 }
 
 async function update(entity) {
-  return await Entity.update(entity, {where: {id: entity.id}});
+  return await Entity.update(entity, {where: {id: entity.id, archived: null}});
 }
 
 async function destroy(id) {
-  return await entity.update(
-      {
-        archived: true
-      },
-      {
-        where: {
-          id
-        }
-      }
-    )
+  return await entity.update({archived: true},{where: id});
 }
 
 async function get(id) {
-  return await Entity.findOne({ where: { id: id }, include: [Projet, Statut] });
+  return await Entity.findOne({ where: { id: id, archived: null}, include: [Projet, Statut] });
 }
 
 async function list(id, page, limit) {
   return await Entity.findAll({
-    where: { ProjetId: id },
+    where: { ProjetId: id, archived: null },
     include: [Projet, Statut],
     limit: Number(limit),
     offset: Number(page) * Number(limit) });
@@ -47,9 +38,9 @@ async function list(id, page, limit) {
 async function count(prid) {
   return prid
     ? await Entity.count({
-      where: {ProjetId: prid}
+      where: {ProjetId: prid, archived: null}
     })
-    : await Entity.count();
+    : await Entity.count({archived: null});
 }
 
 // id	nom	dateprevu	datefin	createdAt	updatedAt	ProjetId	StatutId

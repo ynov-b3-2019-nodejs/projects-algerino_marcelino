@@ -18,25 +18,26 @@ async function insert(entity) {
 }
 
 async function update(entity) {
-  return await Entity.update(entity, { where: { id: entity.id } });
+  return await Entity.update(entity, { where: { id: entity.id, archived: null} });
 }
 
 async function destroy(id) {
-  return await Entity.destroy({ where: { id: id } });
+  return await Entity.update({archived: true}, { where: { id: id } });
 }
 
 async function get(id) {
-  return await Entity.findOne({ where: { id: id }, include: [Portefeuille, Statut, Livrable] });
+  return await Entity.findOne({ where: { id: id, archived: null }, include: [Portefeuille, Statut, Livrable] });
 }
 
 async function list(id, page, limit) {
   return id == 'null'
     ? await Entity.findAll({
+    where: {archived: null},
     include: [Portefeuille, Statut],
     limit  : Number(limit),
     offset : Number(page) * Number(limit)})
     : await Entity.findAll({
-      where  : { portefeuilleId: id },
+      where  : { portefeuilleId: id, archived: null},
       include: [Portefeuille, Statut],
       limit  : Number(limit),
       offset : Number(page) * Number(limit)
@@ -45,8 +46,8 @@ async function list(id, page, limit) {
 
 async function count(prid) {
   return prid == 'null'
-    ? await Entity.count()
+    ? await Entity.count({where: {archived: null}})
     : await Entity.count({
-      where: {PortefeuilleId: prid}
+      where: {PortefeuilleId: prid, archived: null}
     });
 }

@@ -11,6 +11,8 @@ import { LivrableTableListComponent } from './../livrable-table-list/livrable-ta
 import { StatutService } from '../../../services/statut.service';
 import { LivrableService } from './../../../services/livrable.service';
 import { Livrable } from '../../../models/livrable';
+import {Projet} from '../../../models/projet';
+import {ProjetService} from '../../../services/projet.service';
 
 @Component({
   selector: 'app-form-livrable',
@@ -28,10 +30,15 @@ export class FormLivrableComponent implements OnInit {
   livrableForm: FormGroup;
   action: string;
   statuts: [Statut];
+  projets: [Projet];
+  page = 0;
+  limit = 5;
+
 
   constructor(
     private livrableService: LivrableService,
     private statutService: StatutService,
+    private projetService: ProjetService,
     private fb: FormBuilder,
     private datePipe: DatePipe,
     private dialogRef: MatDialogRef<LivrableTableListComponent>) { }
@@ -40,12 +47,15 @@ export class FormLivrableComponent implements OnInit {
     this.statutService.list().subscribe((datas: [Statut]) => {
       this.statuts = datas;
     });
+    this.projetService.list(null, this.page, this.limit).subscribe((datas: [Projet]) => {
+      this.projets = datas;
+    });
   }
 
   onDataLivrable(projetId: number, livrable: Livrable) {
 
     if (!livrable) {
-      this.action = 'create'
+      this.action = 'create';
 
       this.livrableForm = this.fb.group({
         'nom': ['', Validators.required],
@@ -54,9 +64,8 @@ export class FormLivrableComponent implements OnInit {
         'projetId': [projetId, Validators.required],
         'statutId': ['', Validators.required]
       });
-    }
-    else {
-      this.action = 'edit'
+    } else {
+      this.action = 'edit';
 
       this.livrableForm = this.fb.group({
         'id': [livrable.id, Validators.required],
@@ -74,17 +83,15 @@ export class FormLivrableComponent implements OnInit {
 
     if (this.livrableForm.dirty && this.livrableForm.valid) {
 
-
-
-      const datePrevu = this.datePipe.transform(this.livrableForm.controls.dateprevu.value, "yyyy/MM/dd", "fr-FR");
-      const dateFin = this.datePipe.transform(this.livrableForm.controls.datefin.value, "yyyy/MM/dd", "fr-FR");
+      const datePrevu = this.datePipe.transform(this.livrableForm.controls.dateprevu.value, 'yyyy/MM/dd', 'fr-FR');
+      const dateFin = this.datePipe.transform(this.livrableForm.controls.datefin.value, 'yyyy/MM/dd', 'fr-FR');
 
       this.livrableForm.patchValue({
         dateprevu: datePrevu,
         datefin: dateFin,
-      })
+      });
 
-      if (this.action == 'create') {
+      if (this.action === 'create') {
         this.livrableService.create(
           new Livrable(
             this.livrableForm.controls.nom.value,
@@ -93,11 +100,11 @@ export class FormLivrableComponent implements OnInit {
             this.livrableForm.controls.projetId.value,
             this.livrableForm.controls.statutId.value))
             .subscribe(data => {
-            this.dialogRef.close(data);
+              this.dialogRef.close(data);
           });
       }
 
-      if (this.action == 'edit') {
+      if (this.action === 'edit') {
 
         this.livrableService.edit(
           new Livrable(
