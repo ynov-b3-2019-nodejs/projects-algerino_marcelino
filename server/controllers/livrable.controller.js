@@ -28,7 +28,13 @@ async function get(id) {
 }
 
 async function list(id, page, limit) {
-  return await Entity.findAll({
+  return id == 'null'
+    ? Entity.findAll({
+      where: { archived: null },
+      include: [Projet, Statut],
+      limit: Number(limit),
+      offset: Number(page) * Number(limit) })
+    : await Entity.findAll({
     where: { ProjetId: id, archived: null },
     include: [Projet, Statut],
     limit: Number(limit),
@@ -36,7 +42,7 @@ async function list(id, page, limit) {
 }
 
 async function count(prid) {
-  return prid
+  return prid != 'null'
     ? await Entity.count({
       where: {ProjetId: prid, archived: null}
     })

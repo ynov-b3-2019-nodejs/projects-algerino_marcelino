@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Livrable } from "../models/livrable";
+import { Livrable } from '../models/livrable';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class LivrableService {
    * ```
    */
   list(id: number, page: number, limit: number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id + "?page=" + page + "&limit=" + limit);
+    return this.http.get(environment.url + this.entityUrl + '/' + id + '?page=' + page + '&limit=' + limit);
   }
 
   /**
@@ -36,7 +36,7 @@ export class LivrableService {
   * ```
   */
   detail(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/detail/" + id);
+    return this.http.get(environment.url + this.entityUrl + '/detail/' + id);
   }
 
   /**
@@ -75,11 +75,12 @@ export class LivrableService {
   * ```
   */
   delete(id: number) {
-    return this.http.delete(environment.url + this.entityUrl + "/" + id);
+    return this.http.delete(environment.url + this.entityUrl + '/' + id);
   }
 
 
   count(projetId: number) {
+    console.log(environment.url + this.entityUrl + '/count?prid=' + projetId);
     return this.http.get<number>(environment.url + this.entityUrl + '/count?prid=' + projetId);
   }
 

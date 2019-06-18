@@ -1,9 +1,9 @@
-import { Livrable } from "./../../../models/livrable";
+import { Livrable } from './../../../models/livrable';
 import { LivrableService } from './../../../services/livrable.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginatorIntl, PageEvent } from '@angular/material';
 import { FormLivrableComponent } from './../form-livrable/form-livrable.component';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector   : 'app-livrable-table-list',
@@ -32,11 +32,11 @@ export class LivrableTableListComponent implements OnInit {
   loadData() {
     this.isDataLoaded = false;
 
-    this.livrableService.count(this.projetId).subscribe(
+    this.livrableService.count(this.projetId ? this.projetId : null).subscribe(
       (occurrences) => this.numberOfElements = occurrences
     );
 
-    this.livrableService.list(this.projetId, this.page, this.limit).subscribe((datas: Array<Livrable>) => {
+    this.livrableService.list(this.projetId ? this.projetId : null, this.page, this.limit).subscribe((datas: Array<Livrable>) => {
       this.livrable     = new MatTableDataSource<Livrable>(datas);
       this.isDataLoaded = true;
     });
