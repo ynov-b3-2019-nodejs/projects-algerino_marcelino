@@ -5,6 +5,7 @@ const portefeuille = require('./portefeuille.route');
 const projet = require('./projet.route');
 const livrable = require('./livrable.route');
 const statut = require('./statut.route');
+const event = require('./event.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -19,5 +20,6 @@ router.use('/portefeuille', portefeuille);
 router.use('/projet', projet);
 router.use('/livrable', livrable);
 router.use('/statut', statut);
+router.use('/event', event);
 
 module.exports = router;

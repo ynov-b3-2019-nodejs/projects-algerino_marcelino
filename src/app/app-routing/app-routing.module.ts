@@ -8,6 +8,7 @@ import { ProjetDetailComponent} from '../pages/projet/projet-detail/projet-detai
 import { ProjetTableListComponent} from '../pages/projet/projet-table-list/projet-table-list.component';
 import {LivrableTableListComponent} from '../pages/livrable/livrable-table-list/livrable-table-list.component';
 import {LivrableDetailComponent} from '../pages/livrable/livrable-detail/livrable-detail.component';
+import { CalendrierEventListComponent } from './../pages/calendrier/calendrier-event-list/calendrier-event-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,7 +25,11 @@ const routes: Routes = [{
 }, {
   path: 'livrables/:id',
   component: LivrableDetailComponent
-}, {
+},
+  {
+    path: 'calendrier',
+    component: CalendrierEventListComponent
+  }, {
   path: 'auth',
   loadChildren: 'app/auth/auth.module#AuthModule'
 }, {

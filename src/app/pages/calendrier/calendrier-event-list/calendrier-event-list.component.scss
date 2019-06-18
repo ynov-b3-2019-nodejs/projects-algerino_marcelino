@@ -1,0 +1,38 @@
+@import '~angular-calendar/scss/angular-calendar.scss';
+
+.button-row a,
+.button-row button {
+  margin-right: 8px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  background-color: #8757dc !important;
+}
+
+.custom-theme {
+  // First define some global color variables for your app, these are just for the demo, they can be anything you like
+
+  // Call the calendar mixin with a sass color map of your theme. Every property is optional.
+  // For a list of all variables and how they are used,
+  // see https://github.com/mattlewis92/angular-calendar/tree/master/projects/angular-calendar/src/variables.scss
+  // @include cal-theme( ( bg-primary: $bg-dark-primary, bg-secondary: $bg-dark-secondary, weekend-color: indianred, bg-active: $bg-active, border-color: $border-color, gray: $bg-dark-secondary, today-bg: $bg-dark-secondary, event-color-primary: $bg-dark-secondary ) );
+
+  // How to override a non themable property, this was copied from chrome -> inspect element -> styles panel
+  .cal-month-view .cal-day-cell {
+    min-height: 9rem !important;
+    /* height: 1rem; */
+  }
+
+}
+
+.mat-card {
+  padding: 10px !important;
+}
+
+.cal-month-view .cal-day-cell.cal-today .cal-day-number {
+  font-size: 1.2em;
+}

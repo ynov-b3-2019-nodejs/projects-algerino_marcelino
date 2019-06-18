@@ -39,10 +39,16 @@ import {LivrableTableListComponent} from './pages/livrable/livrable-table-list/l
 import {FormLivrableComponent} from './pages/livrable/form-livrable/form-livrable.component';
 import {LivrableDetailComponent} from './pages/livrable/livrable-detail/livrable-detail.component';
 import {getFrenchPaginatorIntl} from './i18l/MyMatPaginatorIntl';
+import { CalendrierEventListComponent } from './pages/calendrier/calendrier-event-list/calendrier-event-list.component';
+import { CalendrierEventFormComponent } from './pages/calendrier/calendrier-event-form/calendrier-event-form.component';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { CalendrierEventDetailsComponent } from './pages/calendrier/calendrier-event-details/calendrier-event-details.component';
+
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -66,6 +72,9 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     FormLivrableComponent,
     LivrableDetailComponent,
     ProjetDetailComponent,
+    CalendrierEventListComponent,
+    CalendrierEventFormComponent,
+    CalendrierEventDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +92,11 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     }),
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     {
@@ -104,9 +117,8 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent, FormProjetComponent, EditPortefeuilleComponent, FormLivrableComponent],
+  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent, FormProjetComponent, EditPortefeuilleComponent, FormLivrableComponent, CalendrierEventFormComponent, CalendrierEventDetailsComponent],
   bootstrap: [AppComponent],
-
 })
 
 export class AppModule {

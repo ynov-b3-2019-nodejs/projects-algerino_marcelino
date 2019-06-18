@@ -1,0 +1,34 @@
+<div *ngIf="isDataLoaded" class="loader">
+  <h2 mat-dialog-title>Information sur l'événement : {{event.titre}}</h2>
+  <mat-dialog-content class="mat-typography card">
+
+
+    <div class="blockInfo">
+      <div class="blockInfo-titre"> <span> <i class=" material-icons blockInfo-icon"> date_range  </i>Information des dates</span></div>
+      <p> Date de Début : {{event.datedebut | date:'dd/MM/yyyy HH:mm'}} </p>
+      <p> Date de Fin : {{event.datefin | date:'dd/MM/yyyy HH:mm'}} </p>
+    </div>
+
+    <div class="blockInfo">
+      <div class="blockInfo-titre"><span><i class=" material-icons blockInfo-icon"> info</i>Information sur le projet</span></div>
+      <p> Nom : {{event.Projet.nom}}</p>
+    </div>
+
+    <div class="blockInfo">
+      <div class="blockInfo-titre"> <span> <i class=" material-icons blockInfo-icon"> update </i>Mise à jour de l'événement</span></div>
+      <p> Date de création : {{event.createdAt | date:'dd/MM/yyyy HH:mm'}}</p>
+      <p *ngIf="event.updatedAt != event.createdAt"> Date de mise à jour : {{event.updatedAt | date:'dd/MM/yyyy HH:mm'}} </p>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+      <button mat-stroked-button mat-dialog-close color="primary" style="margin-right: 0.5rem">Fermer</button>
+      <button mat-stroked-button color="accent"  style="margin-right: 0.5rem" (click)="openDialog(event)">Modifier</button>
+      <button mat-stroked-button color="warn" (click)="delete(event.id)">Supprimer</button>
+  </mat-dialog-actions>
+</div>
+
+<div *ngIf="!isDataLoaded" class="loader">
+  <mat-spinner></mat-spinner>
+</div>

@@ -5,6 +5,11 @@ const Livrable = require('../models/sequelize/livrable');
 const Statut = require('../models/sequelize/statut');
 const Role = require('../models/sequelize/roles');
 const RolesUser = require('../models/sequelize/users_roles');
+const Event = require('../models/sequelize/event');
+
+
+Projet.hasMany(Event);
+Event.belongsTo(Projet);
 
 Portefeuille.hasMany(Projet);
 Projet.belongsTo(Portefeuille);
@@ -20,6 +25,11 @@ Projet.belongsTo(Statut);
 
 Statut.hasMany(Livrable);
 Livrable.belongsTo(Statut);
+
+Event.belongsToMany(User, {
+  through: 'UserEvent',
+  foreignKey: 'eventId'
+});
 
 Portefeuille.belongsToMany(User, {
   through: 'UserPortefeuille',
@@ -49,6 +59,7 @@ User.belongsToMany(Projet, {
   await Projet.sync();
   await Livrable.sync();
   await RolesUser.sync();
+  await Event.sync();
 })();
 
 const statuts = [
