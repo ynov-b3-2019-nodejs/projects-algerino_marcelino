@@ -14,6 +14,15 @@
       </mat-select>
       <mat-error *ngIf="!projetForm.controls.statutId.valid">Le statut est requis</mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Portefeuille : </mat-label>
+      <mat-select formControlName="portefeuilleId" id="portefeuilleId">
+        <mat-option *ngFor="let portefeuille of portefeuilles" [value]="portefeuille.id">
+          {{ portefeuille.nom }}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

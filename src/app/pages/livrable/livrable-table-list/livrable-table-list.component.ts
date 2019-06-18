@@ -1,8 +1,9 @@
-import { Livrable } from "./../../../models/livrable";
+import { Livrable } from './../../../models/livrable';
 import { LivrableService } from './../../../services/livrable.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginatorIntl, PageEvent } from '@angular/material';
 import { FormLivrableComponent } from './../form-livrable/form-livrable.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector   : 'app-livrable-table-list',
@@ -26,16 +27,16 @@ export class LivrableTableListComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, private livrableService: LivrableService, public dialog: MatDialog) { }
 
-  ngOnInit() { this.loadData() }
+  ngOnInit() { this.loadData(); }
 
   loadData() {
     this.isDataLoaded = false;
 
-    this.livrableService.count().subscribe(
+    this.livrableService.count(this.projetId ? this.projetId : null).subscribe(
       (occurrences) => this.numberOfElements = occurrences
     );
 
-    this.livrableService.list(this.projetId, this.page, this.limit).subscribe((datas: Array<Livrable>) => {
+    this.livrableService.list(this.projetId ? this.projetId : null, this.page, this.limit).subscribe((datas: Array<Livrable>) => {
       this.livrable     = new MatTableDataSource<Livrable>(datas);
       this.isDataLoaded = true;
     });
@@ -44,19 +45,19 @@ export class LivrableTableListComponent implements OnInit {
   openDialog(livrable: Livrable) {
     const dialogRef = this.dialog.open(FormLivrableComponent);
 
-    dialogRef.componentInstance.onDataLivrable(this.projetId, livrable)
+    dialogRef.componentInstance.onDataLivrable(this.projetId, livrable);
 
 
     dialogRef.afterClosed().subscribe((result: Livrable) => {
       if (result) {
-        this.snackBar.open('Le livrable ' + result.nom + ' à bien étais créé !', 'OK', { duration: 5000 });
+        this.snackBar.open('Le livrable ' + result.nom + ' à bien été créé !', 'OK', { duration: 5000 });
         this.loadData();
       }
     });
   }
 
   deleteProjet(livrableId: number) {
-    this.livrableService.delete(livrableId).subscribe((data) => { this.loadData(); })
+    this.livrableService.delete(livrableId).subscribe((data) => { this.loadData(); });
   }
 
 

@@ -5,7 +5,7 @@ import { Projet } from './../../../models/projet';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
-import { TableListComponent } from '../../portefeuilles/table-list/table-list.component';
+import { TableListPortefeuilleComponent } from '../../portefeuilles/table-list/table-list-portefeuille.component';
 import {
   addHours
 } from 'date-fns';
@@ -34,11 +34,11 @@ export class CalendrierEventFormComponent implements OnInit {
     private eventService: EventService,
     private projetService: ProjetService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TableListComponent>,
+    private dialogRef: MatDialogRef<TableListPortefeuilleComponent>,
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) data) {
 
-    this.projetService.list(null, null, null).subscribe((datas: [Projet]) => {
+    this.projetService.list(null, 0, 2000000).subscribe((datas: [Projet]) => {
       this.projets = datas;
     });
 
@@ -50,7 +50,7 @@ export class CalendrierEventFormComponent implements OnInit {
   onDataEvent(event: Event) {
 
     if (!event) {
-      this.action = 'create'
+      this.action = 'create';
 
       this.eventForm = this.fb.group({
         'titre': ['', Validators.required],
@@ -60,9 +60,8 @@ export class CalendrierEventFormComponent implements OnInit {
         'heureEnd': ['', Validators.required],
         'projetId': ['', Validators.required]
       });
-    }
-    else {
-      this.action = 'edit'
+    } else {
+      this.action = 'edit';
 
       this.eventForm = this.fb.group({
         'id': [event.id, Validators.required],
@@ -80,33 +79,43 @@ export class CalendrierEventFormComponent implements OnInit {
   saveEvent() {
     if (this.eventForm.dirty && this.eventForm.valid) {
 
-      const convertDateStart = addHours(this.eventForm.controls.datedebut.value, this.convertDate(this.eventForm.controls.heureStart.value));
+      const convertDateStart = addHours(this.eventForm.controls.datedebut.value,
+        this.convertDate(this.eventForm.controls.heureStart.value));
       const convertDateEnd = addHours(this.eventForm.controls.datefin.value, this.convertDate(this.eventForm.controls.heureEnd.value));
 
-      const dateStart = this.datePipe.transform(convertDateStart, "yyyy/MM/dd HH:mm", "fr-FR")
-      const dateEnd = this.datePipe.transform(convertDateEnd, "yyyy/MM/dd HH:mm", "fr-FR")
+      const dateStart = this.datePipe.transform(convertDateStart, 'yyyy/MM/dd HH:mm', 'fr-FR');
+      const dateEnd = this.datePipe.transform(convertDateEnd, 'yyyy/MM/dd HH:mm', 'fr-FR');
 
 
       this.eventForm.patchValue({
         datedebut: dateStart,
         datefin: dateEnd,
-      })
+      });
 
-      if (this.action == 'create') {
-        this.eventService.create(new Event(this.eventForm.controls.titre.value, this.eventForm.controls.datedebut.value, this.eventForm.controls.datefin.value, this.eventForm.controls.projetId.value)).subscribe(data => {
+      if (this.action === 'create') {
+        this.eventService.create(new Event(
+          this.eventForm.controls.titre.value,
+          this.eventForm.controls.datedebut.value,
+          this.eventForm.controls.datefin.value,
+          this.eventForm.controls.projetId.value)).subscribe(data => {
           this.dialogRef.close(data);
         });
       }
-      if (this.action == 'edit') {
-        this.eventService.update(new Event(this.eventForm.controls.titre.value, this.eventForm.controls.datedebut.value, this.eventForm.controls.datefin.value, this.eventForm.controls.projetId.value, this.eventForm.controls.id.value)).subscribe(data => {
+      if (this.action === 'edit') {
+        this.eventService.update(new Event(
+          this.eventForm.controls.titre.value,
+          this.eventForm.controls.datedebut.value,
+          this.eventForm.controls.datefin.value,
+          this.eventForm.controls.projetId.value,
+          this.eventForm.controls.id.value)).subscribe(data => {
           this.dialogRef.close(data);
         });
       }
     }
   }
 
-  convertDate(dateTime: string){
-    const dateSplit = dateTime.split(":");
+  convertDate(dateTime: string) {
+    const dateSplit = dateTime.split(':');
     return Number(dateSplit[0]);
   }
 }

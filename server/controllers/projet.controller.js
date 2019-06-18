@@ -10,7 +10,6 @@ module.exports = {
   destroy,
   get,
   list,
-  all,
   count
 };
 
@@ -19,30 +18,36 @@ async function insert(entity) {
 }
 
 async function update(entity) {
-  return await Entity.update(entity, { where: { id: entity.id } });
+  return await Entity.update(entity, { where: { id: entity.id, archived: null} });
 }
 
 async function destroy(id) {
-  return await Entity.destroy({ where: { id: id } });
+  return await Entity.update({archived: true}, { where: { id: id } });
 }
 
 async function get(id) {
-  return await Entity.findOne({ where: { id: id }, include: [Portefeuille, Statut, Livrable] });
+  return await Entity.findOne({ where: { id: id, archived: null }, include: [Portefeuille, Statut, Livrable] });
 }
 
 async function list(id, page, limit) {
-  return await Entity.findAll({
-    where  : { portefeuilleId: id },
+  return id == 'null'
+    ? await Entity.findAll({
+    where: {archived: null},
     include: [Portefeuille, Statut],
     limit  : Number(limit),
-    offset : Number(page) * Number(limit)
-  });
+    offset : Number(page) * Number(limit)})
+    : await Entity.findAll({
+      where  : { portefeuilleId: id, archived: null},
+      include: [Portefeuille, Statut],
+      limit  : Number(limit),
+      offset : Number(page) * Number(limit)
+    });
 }
 
-async function all() {
-  return await Entity.findAll();
-}
-
-async function count() {
-  return await Entity.count();
+async function count(prid) {
+  return prid == 'null'
+    ? await Entity.count({where: {archived: null}})
+    : await Entity.count({
+      where: {PortefeuilleId: prid, archived: null}
+    });
 }

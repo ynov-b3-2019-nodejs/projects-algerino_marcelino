@@ -1,14 +1,14 @@
-let Entity = require('../models/sequelize/portefeuille');
+const Entity = require('../models/sequelize/portefeuille');
 const Statut = require('../models/sequelize/statut');
 const Projet = require('../models/sequelize/projet');
-
 
 module.exports = {
   insert,
   update,
   destroy,
   get,
-  list
+  list,
+  count
 };
 
 async function insert(entity) {
@@ -16,17 +16,39 @@ async function insert(entity) {
 }
 
 async function update(entity, id) {
-  return await Entity.update(entity, {where: {_id: id}});
+  return await Entity.update(entity, {where: {id: id, archived: null}});
 }
 
 async function destroy(id) {
-  return await Entity.destroy({where: {_id: id}});
+  return await Entity.update({archived: true}, {where: {id: id}});
 }
 
-async function get(id) {
-  return await Entity.findOne({where: {_id: id}, include:[Projet]});
+async function get(col, val) {
+  return await Entity.findOne(
+    {
+      where: {[col]: val, archived: null},
+      include: [
+        Statut,
+        {
+          model: Projet,
+          include: [
+            Statut
+          ]
+        }
+        ]
+    }
+    );
 }
 
-async function list() {
-  return await Entity.findAll({include: [Statut]});
+async function list(limit, page) {
+  return await Entity.findAll({
+    where: {archived: null},
+    include: Statut,
+    limit: Number(limit),
+    offset: Number(page) * Number(limit)
+  });
+}
+
+async function count() {
+  return await Entity.count({where: {archived: null}});
 }

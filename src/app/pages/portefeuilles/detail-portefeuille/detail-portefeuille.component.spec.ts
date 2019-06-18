@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableListComponent } from './table-list.component';
+import { DetailPortefeuilleComponent } from './detail-portefeuille.component';
 
-describe('TableListComponent', () => {
-  let component: TableListComponent;
-  let fixture: ComponentFixture<TableListComponent>;
+describe('DetailPortefeuilleComponent', () => {
+  let component: DetailPortefeuilleComponent;
+  let fixture: ComponentFixture<DetailPortefeuilleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableListComponent ]
+      declarations: [ DetailPortefeuilleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableListComponent);
+    fixture = TestBed.createComponent(DetailPortefeuilleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

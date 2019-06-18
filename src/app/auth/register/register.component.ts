@@ -18,10 +18,10 @@ export class RegisterComponent implements OnInit {
   }
 
   passwordsMatchValidator(control: FormControl): ValidationErrors {
-    let password = control.root.get('password');
+    const password = control.root.get('password');
     return password && control.value !== password.value ? {
       passwordMatch: true
-    }: null;
+    } : null;
   }
 
   userForm = new FormGroup({
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
     repeatPassword: new FormControl('', [Validators.required, this.passwordsMatchValidator])
-  })
+  });
 
   get fullname(): any { return this.userForm.get('fullname'); }
   get email(): any { return this.userForm.get('email'); }
@@ -38,9 +38,9 @@ export class RegisterComponent implements OnInit {
 
   register() {
 
-    if(!this.userForm.valid) return;
+    if (!this.userForm.valid) { return; }
 
-    let {
+    const {
       fullname,
       email,
       password,
@@ -48,9 +48,9 @@ export class RegisterComponent implements OnInit {
     } = this.userForm.getRawValue();
 
     this.authService.register(fullname, email, password, repeatPassword)
-    .subscribe(data => {
+    .subscribe(() => {
       this.router.navigate(['']);
-    })
+    });
   }
 
 }

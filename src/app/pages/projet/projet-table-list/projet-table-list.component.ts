@@ -1,4 +1,4 @@
-import { Projet } from "./../../../models/projet";
+import { Projet } from './../../../models/projet';
 import { ProjetService } from './../../../services/projet.service';
 import { FormProjetComponent } from './../form-projet/form-projet.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -16,7 +16,7 @@ export class ProjetTableListComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'statut', 'portefeuille', 'action'];
   projet: MatTableDataSource<Projet>;
 
-  portefeuilleId: number = 1;
+  portefeuilleId = null;
   limit = 5;
   page = 0;
   numberOfElements: number;
@@ -27,12 +27,12 @@ export class ProjetTableListComponent implements OnInit {
 
   constructor(private snackBar: MatSnackBar, private projetService: ProjetService, public dialog: MatDialog) { }
 
-  ngOnInit() { this.loadData()  }
+  ngOnInit() { this.loadData();  }
 
-  loadData(){
+  loadData() {
     this.isDataLoaded = false;
 
-    this.projetService.count().subscribe(
+    this.projetService.count(this.portefeuilleId).subscribe(
       (occurrences) => this.numberOfElements = occurrences
     );
 
@@ -45,12 +45,12 @@ export class ProjetTableListComponent implements OnInit {
   openDialog(projet: Projet) {
     const dialogRef = this.dialog.open(FormProjetComponent);
 
-    dialogRef.componentInstance.onDataProjet(this.portefeuilleId, projet)
+    dialogRef.componentInstance.onDataProjet(this.portefeuilleId, projet);
 
 
     dialogRef.afterClosed().subscribe((result: Projet) => {
-      if(result){
-        this.snackBar.open('Le projet ' + result.nom + ' à bien étais créé !', 'Effacer', { duration: 5000 });
+      if (result) {
+        this.snackBar.open('Le projet ' + result.nom + ' à bien été créé !', 'Ok', { duration: 5000 });
         this.loadData();
       }
     });
@@ -63,7 +63,7 @@ export class ProjetTableListComponent implements OnInit {
   }
 
   deleteProjet(projetId: number) {
-    this.projetService.delete(projetId).subscribe((data) => { this.loadData(); })
+    this.projetService.delete(projetId).subscribe(() => { this.loadData(); });
   }
 
 }

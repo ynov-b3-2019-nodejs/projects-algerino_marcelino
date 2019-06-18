@@ -6,20 +6,20 @@
           [routerLink]="[ '/projets']">
           <mat-icon aria-label="Retour">reply</mat-icon>
         </button>
-        <mat-card-title class="spacerIcon spacerTitle">Projet actuel: {{projet.nom}}</mat-card-title>
+        <mat-card-title class="spacerIcon spacerTitle">Projet actuel: {{projet ? projet.nom : 'Aucun projet'}}</mat-card-title>
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-card-subtitle class="spacerTitle" style="color: rgba(0,0,0,1.54) !important;">Portefeuille actuel:
-      {{projet.Portefeuille.nom}}
+      {{projet.Portefeuille ? projet.Portefeuille.nom : 'Aucun Portefeuille'}}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-divider [inset]="true"></mat-divider>
       <p>
-        Modifié Le : {{projet.updatedAt | date:'dd/MM/yyyy'}}
+        Modifié Le : {{projet ? (projet.updatedAt | date:'dd/MM/yyyy') : '' }}
       </p>
       <mat-divider [inset]="true"></mat-divider>
       <p>
-        Statut du projet : {{projet.Statut.nom}}
+        Statut du projet : {{projet ? projet.Statut.nom : ''}}
       </p>
     </mat-card-content>
   </mat-card>

@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, Validators} from '@angular/forms';
-import {TableListComponent} from '../table-list/table-list.component';
-import {PortefeuilleService} from '../../../services/portefeuille.service';
-import {Portefeuille} from '../../../models/portefeuille';
-import {StatutService} from '../../../services/statut.service';
-import {Statut} from '../../../models/statut';
+import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { TableListPortefeuilleComponent} from '../table-list/table-list-portefeuille.component';
+import { PortefeuilleService} from '../../../services/portefeuille.service';
+import { Portefeuille} from '../../../models/portefeuille';
+import { StatutService} from '../../../services/statut.service';
+import { Statut} from '../../../models/statut';
 
 @Component({
   selector: 'app-form-portefeuille',
@@ -14,7 +14,7 @@ import {Statut} from '../../../models/statut';
 })
 export class FormPortefeuilleComponent implements OnInit {
 
-  userForm: any;
+  userForm: FormGroup;
 
   statuts: [Statut];
 
@@ -22,7 +22,7 @@ export class FormPortefeuilleComponent implements OnInit {
     private portefeuilleService: PortefeuilleService,
     private statutService: StatutService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TableListComponent>,
+    private dialogRef: MatDialogRef<TableListPortefeuilleComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     this.userForm = this.fb.group({
       'nom': ['', Validators.required],
@@ -33,13 +33,12 @@ export class FormPortefeuilleComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   saveUser() {
     if (this.userForm.dirty && this.userForm.valid) {
-      console.log(this.userForm.controls.statutId);
-      this.portefeuilleService.create(new Portefeuille(this.userForm.controls.nom.value, this.userForm.controls.statutId.value)).subscribe(data => {
+      this.portefeuilleService.create(
+        new Portefeuille(this.userForm.controls.nom.value, this.userForm.controls.statutId.value)).subscribe(data => {
         this.dialogRef.close(data);
       });
     }

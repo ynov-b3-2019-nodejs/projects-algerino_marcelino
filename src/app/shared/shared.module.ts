@@ -3,8 +3,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
-
-
 import {
   MatToolbarModule,
   MatMenuModule,
@@ -25,7 +23,6 @@ import {
   MatSelectModule, MatPaginatorIntl, MatNativeDateModule, MatDatepickerModule
 } from '@angular/material';
 import {TranslateModule, TranslateParser, TranslateService} from '@ngx-translate/core';
-// import {MyMatPaginatorIntl} from '../i18l/MyMatPaginatorIntl';
 
 @NgModule({
   imports: [

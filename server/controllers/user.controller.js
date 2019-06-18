@@ -35,18 +35,18 @@ async function insert(user) {
 }
 
 async function update(entity, id) {
-  return await UserSeq.update(entity, {where: {id}});
+  return await UserSeq.update(entity, {where: {id, archived: null}});
 }
 
 async function destroy(id) {
-  return await UserSeq.destroy({where: {id: id}});
+  return await UserSeq.update({archived: true}, {where: {id: id}});
 }
 
 async function get(id) {
-  return await UserSeq.findOne({where: {id: id}, include: [RolesSeq]});
+  return await UserSeq.findOne({where: {id: id, archived: null}, include: [RolesSeq]});
 }
 
 async function list() {
-  return await UserSeq.findAll({include: [RolesSeq]});
+  return await UserSeq.findAll({include: [RolesSeq], where: {archived: null}});
 }
 

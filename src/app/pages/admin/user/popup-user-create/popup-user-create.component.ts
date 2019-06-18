@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {TableListComponent} from '../../../portefeuilles/table-list/table-list.component';
+import {TableListPortefeuilleComponent} from '../../../portefeuilles/table-list/table-list-portefeuille.component';
 import {UserService} from '../../../../services/user.service';
 import {Role} from '../../../../models/role.model';
 import {RoleService} from '../../../../services/role.service';
@@ -23,7 +23,7 @@ export class PopupUserCreateComponent implements OnInit {
     private userService: UserService,
     private roleService: RoleService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<TableListComponent>,
+    private dialogRef: MatDialogRef<TableListPortefeuilleComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     if (data.element && data.element.id) {
       this.isNew = false;

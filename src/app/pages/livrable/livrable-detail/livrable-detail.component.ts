@@ -11,13 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 export class LivrableDetailComponent implements OnInit {
 
 
-  livrable: Livrable
-  isDataLoaded: boolean
+  livrable: Livrable;
+  isDataLoaded: boolean;
 
   constructor(private activeRoute: ActivatedRoute, private livrableService: LivrableService) { }
 
   ngOnInit() {
-    this.isDataLoaded = false
+    this.isDataLoaded = false;
 
     this.activeRoute.params.subscribe(params => {
       if (params['id']) {
@@ -28,8 +28,7 @@ export class LivrableDetailComponent implements OnInit {
           this.isDataLoaded = true;
         });
       }
-    })
+    });
   }
 
 }
-

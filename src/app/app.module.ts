@@ -15,19 +15,22 @@ import {CatchErrorInterceptor} from './interceptors/http-error.interceptor';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './home/home.component';
-import {TableListComponent} from './pages/portefeuilles/table-list/table-list.component';
-import {UserListComponent} from './pages/admin/user/user-list/user-list.component';
+import {TableListPortefeuilleComponent} from './pages/portefeuilles/table-list/table-list-portefeuille.component';
+import {
+ UserListComponent} from './pages/admin/user/user-list/user-list.component';
 import {PopupUserCreateComponent} from './pages/admin/user/popup-user-create/popup-user-create.component';
 import {YesNoPopupComponent} from './commons/component/yes-no-popup/yes-no-popup.component';
-import {
-  MatDialogModule,
+import { MatDialogModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatTableModule,
-  MatTooltipModule, MatPaginatorIntl
+  MatTooltipModule,
+  MatPaginatorIntl
 } from '@angular/material';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {EditPortefeuilleComponent } from './pages/portefeuilles/edit-portefeuille/edit-portefeuille.component';
+import { DetailPortefeuilleComponent } from './pages/portefeuilles/detail-portefeuille/detail-portefeuille.component';
 import {FormPortefeuilleComponent} from './pages/portefeuilles/form-portefeuille/form-portefeuille.component';
 import {ProjetTableListComponent} from './pages/projet/projet-table-list/projet-table-list.component';
 import {FormProjetComponent} from './pages/projet/form-projet/form-projet.component';
@@ -57,11 +60,13 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    TableListComponent,
+    TableListPortefeuilleComponent,
     FormPortefeuilleComponent,
     ProjetTableListComponent,
     UserListComponent,
     YesNoPopupComponent,
+    EditPortefeuilleComponent,
+    DetailPortefeuilleComponent,
     FormProjetComponent,
     LivrableTableListComponent,
     FormLivrableComponent,
@@ -112,7 +117,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
       useValue: getFrenchPaginatorIntl()
     }
   ],
-  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent, FormProjetComponent, FormLivrableComponent, CalendrierEventFormComponent, CalendrierEventDetailsComponent],
+  entryComponents: [FormPortefeuilleComponent, PopupUserCreateComponent, YesNoPopupComponent, FormProjetComponent, EditPortefeuilleComponent, FormLivrableComponent, CalendrierEventFormComponent, CalendrierEventDetailsComponent],
   bootstrap: [AppComponent],
 })
 

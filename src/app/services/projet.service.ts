@@ -1,4 +1,4 @@
-import { Projet } from "./../models/projet";
+import { Projet } from './../models/projet';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -17,6 +17,8 @@ export class ProjetService {
   /**
     * SERVICES :  Affichage de tout les projets
    * @param id   l'ID fait référence à celui du portefeuille
+   * @param page Page souhaité
+   * @param limit Nombre d'élément à récupérer
    * @returns    Return toute la liste des projets qui sont lier aux protefeuille
    *
    * Exemple :
@@ -24,8 +26,8 @@ export class ProjetService {
    * this.ProjetService.list().subscribe((datas: Array<projet>) => {});
    * ```
    */
-  list(id: number, page:number,limit:number) {
-    return this.http.get(environment.url + this.entityUrl + "/" + id + "?page=" + page + "&limit=" + limit);
+  list(id: number, page: number, limit: number) {
+    return this.http.get(environment.url + this.entityUrl + '/' + id + '?page=' + page + '&limit=' + limit);
   }
 
 
@@ -65,7 +67,7 @@ export class ProjetService {
   * ```
   */
   delete(id: number) {
-    return this.http.delete(environment.url + this.entityUrl + "/" + id);
+    return this.http.delete(environment.url + this.entityUrl + '/' + id);
   }
 
   /**
@@ -78,11 +80,11 @@ export class ProjetService {
     * ```
     */
   detail(id: number) {
-    return this.http.get(environment.url + this.entityUrl + "/detail/" + id);
+    return this.http.get(environment.url + this.entityUrl + '/detail/' + id);
   }
 
 
-  count() {
-    return this.http.get<number>(environment.url + this.entityUrl + '/count');
+  count(portefeuilleId: number) {
+    return this.http.get<number>(environment.url + this.entityUrl + '/count?prid=' + portefeuilleId);
   }
 }

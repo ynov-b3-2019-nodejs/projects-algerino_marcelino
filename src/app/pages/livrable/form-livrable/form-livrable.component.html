@@ -25,6 +25,15 @@
         </mat-select>
         <mat-error *ngIf="!livrableForm.controls.statutId.valid">Le statut est requis</mat-error>
       </mat-form-field>
+    <mat-form-field>
+      <mat-label>Projet : </mat-label>
+      <mat-select formControlName="projetId" id="projetId">
+        <mat-option *ngFor="let projet of projets" [value]="projet.id">
+          {{projet.nom}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!livrableForm.controls.projetId.valid">Le projet est requis</mat-error>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

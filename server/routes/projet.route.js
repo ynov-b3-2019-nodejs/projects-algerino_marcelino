@@ -13,16 +13,12 @@ async function get(req, res) {
 
 router.get('/count', asyncHandler(count));
 async function count(req, res) {
-  res.send(200, await EntityController.count());
+  res.send(200, await EntityController.count(req.query.prid));
 }
 
 router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandler(list));
 async function list(req, res) {
   res.json(await EntityController.list(req.params.id, req.query.page, req.query.limit));
-}
-router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(list));
-async function list(req, res) {
-  res.json(await EntityController.all());
 }
 
 router.patch('/', passport.authenticate('jwt', { session: false }), asyncHandler(update));
