@@ -1,0 +1,22 @@
+<div class="container">
+  <div *ngIf="!isOpen" style="height: 20px; "></div>
+  <ul *ngIf="isOpen" class="chat-messages" #ChatMessage>
+    <li *ngFor="let message of messages">
+      <div class="message-container">
+        <span class="username">
+          {{message.fullname}} :
+        </span>
+        <div class="message">{{message.message}}</div>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="isOpen" class="chat-sender">
+    <mat-form-field class="example-form-field">
+      <input (keyup.enter)="sendMsg()" matInput type="text" placeholder="Commentaire" [(ngModel)]="message">
+      <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Clear" (click)="message=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-button (click)="sendMsg()"> Send</button>
+  </div>
+</div>

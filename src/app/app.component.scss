@@ -27,3 +27,20 @@
     }
   }
 }
+
+.chat-container{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border-top-left-radius: 5px;
+  padding: 10px;
+  width: 400px;
+  .caret-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 3px;
+    background-color: white;
+  }
+}

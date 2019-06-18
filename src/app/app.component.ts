@@ -4,11 +4,16 @@ import {Subscription} from 'rxjs/Subscription';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 
+// or with import syntax
+// import io from 'socket.io-client';
+
 
 import {AuthService} from './services/auth.service';
 import * as schema from './schema/equipment.json';
 import {User, isAdmin} from './models/user.model';
 import {Role} from './models/role.model';
+import {environment} from '../environments/environment';
+import {CalendarSocketService} from './sockets/calendar-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +25,11 @@ export class AppComponent implements OnInit {
   private userSubscription: Subscription;
   public user: User;
 
+  isCommentOpen = false;
+
   constructor(
     private authService: AuthService,
+    private calendarSocketService: CalendarSocketService,
     private router: Router,
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry
@@ -59,6 +67,8 @@ export class AppComponent implements OnInit {
 
   registerSvgIcons() {
     [
+      'arrow_down',
+      'arrow_up',
       'close',
       'add',
       'add-blue',

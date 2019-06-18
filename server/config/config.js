@@ -19,7 +19,9 @@ const envVarsSchema = Joi.object({
   SEQ_DB: Joi.string().required()
     .description('Mysql DB'),
   SEQ_PWD: Joi.string()
-    .description('Mysql PWD')
+    .description('Mysql PWD'),
+  SOCKET_PORT: Joi.string()
+    .description('SOCKET PORT')
 }).unknown()
   .required();
 
@@ -31,6 +33,7 @@ if (error) {
 const config = {
   env: envVars.NODE_ENV,
   port: envVars.SERVER_PORT,
+  socketPort: envVars.SOCKET_PORT,
   jwtSecret: envVars.JWT_SECRET,
   frontend: envVars.MEAN_FRONTEND || 'angular',
   sequelize: {

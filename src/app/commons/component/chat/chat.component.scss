@@ -1,0 +1,26 @@
+.message-container{
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+.username{
+  font-weight: bold;
+  width: 25%;
+}
+.message{
+  width: 75%;
+}
+.chat-messages{
+  list-style: none;
+  max-height: 50vh;
+  overflow: auto;
+}
+.chat-sender{
+  display: flex;
+}
+.chat-sender mat-form-field{
+  width: 75%;
+}
+.chat-sender button{
+  width: 25%;
+}

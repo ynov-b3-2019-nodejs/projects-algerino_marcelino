@@ -10,4 +10,10 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-
+<div class="chat-container">
+  <div class="caret-button">
+    <mat-icon (click)="isCommentOpen = !isCommentOpen;" *ngIf="isCommentOpen" svgIcon="arrow_down" aria-hidden="false" aria-label="Fermer les commentaires"></mat-icon>
+    <mat-icon (click)="isCommentOpen = !isCommentOpen;" *ngIf="!isCommentOpen" svgIcon="arrow_up" aria-hidden="false" aria-label="Ouvrir les commentaires"></mat-icon>
+  </div>
+  <app-chat [isOpen]="isCommentOpen"></app-chat>
+</div>

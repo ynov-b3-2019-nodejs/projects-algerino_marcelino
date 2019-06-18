@@ -49,6 +49,7 @@ import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { CalendrierEventDetailsComponent } from './pages/calendrier/calendrier-event-details/calendrier-event-details.component';
 
+import { ChatComponent } from './commons/component/chat/chat.component';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -75,6 +76,7 @@ const httpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, '.
     CalendrierEventListComponent,
     CalendrierEventFormComponent,
     CalendrierEventDetailsComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
