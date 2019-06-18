@@ -41,6 +41,4 @@ async function count() {
   return await Entity.count();
 }
 
-
-
 // id	nom	dateprevu	datefin	createdAt	updatedAt	ProjetId	StatutId
