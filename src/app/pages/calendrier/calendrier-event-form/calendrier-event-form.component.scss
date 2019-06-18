@@ -1,0 +1,14 @@
+.container-field {
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.pickerDate {
+  padding: 0 5%;
+  width: 100%;
+  margin-bottom: 2%;
+}

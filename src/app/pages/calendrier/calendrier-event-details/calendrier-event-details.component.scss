@@ -1,0 +1,30 @@
+.card {
+  width: 60rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 100%;
+  }
+
+}
+
+.blockInfo {
+  border: 5px solid rgba(138, 44, 226, 0.5);
+  margin: .5rem;
+
+  &-titre {
+    font-size: 1rem;
+    color: blueviolet;
+    margin: 1rem;
+  }
+
+  &-icon {
+    position: relative;
+    /* Adjust these values accordingly */
+    top: 5px;
+    left: -5px;
+  }
+}

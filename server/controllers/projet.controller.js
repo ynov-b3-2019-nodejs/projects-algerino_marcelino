@@ -10,6 +10,7 @@ module.exports = {
   destroy,
   get,
   list,
+  all,
   count
 };
 
@@ -36,6 +37,10 @@ async function list(id, page, limit) {
     limit  : Number(limit),
     offset : Number(page) * Number(limit)
   });
+}
+
+async function all() {
+  return await Entity.findAll();
 }
 
 async function count() {
