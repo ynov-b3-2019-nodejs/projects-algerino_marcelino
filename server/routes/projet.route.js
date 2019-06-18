@@ -20,10 +20,6 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), asyncHandle
 async function list(req, res) {
   res.json(await EntityController.list(req.params.id, req.query.page, req.query.limit));
 }
-router.get('/', passport.authenticate('jwt', { session: false }), asyncHandler(list));
-async function list(req, res) {
-  res.json(await EntityController.all());
-}
 
 router.patch('/', passport.authenticate('jwt', { session: false }), asyncHandler(update));
 async function update(req, res) {

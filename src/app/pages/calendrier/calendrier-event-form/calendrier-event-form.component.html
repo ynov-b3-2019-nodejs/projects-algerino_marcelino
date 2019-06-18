@@ -1,5 +1,5 @@
 <h2 *ngIf="action === 'create'" mat-dialog-title>Créer un événement</h2>
-<h2 *ngIf="action === 'edit'" mat-dialog-title>Editer votre événement</h2>
+<h2 *ngIf="action === 'edit'" mat-dialog-title>Éditer votre événement</h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="eventForm" (submit)="saveEvent()" class="container-field">
 

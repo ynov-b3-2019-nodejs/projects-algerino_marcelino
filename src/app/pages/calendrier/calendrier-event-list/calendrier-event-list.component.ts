@@ -6,7 +6,7 @@ import { CalendarDateFormatter, CalendarEvent, CalendarView, DAYS_OF_WEEK } from
 import { DOCUMENT } from '@angular/common';
 import { CustomDateFormatter } from '../providers/custom-date-formatter.provider';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { CalendrierEventFormComponent } from '../calendrier-event-form/calendrier-event-form.component'
+import { CalendrierEventFormComponent } from '../calendrier-event-form/calendrier-event-form.component';
 
 import {
   addHours
@@ -46,7 +46,7 @@ export class CalendrierEventListComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  locale: string = 'fr';
+  locale = 'fr';
 
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
@@ -70,7 +70,7 @@ export class CalendrierEventListComponent implements OnInit {
   }
 
   loadData() {
-    this.events = []
+    this.events = [];
     this.isDataLoaded = false;
 
     this.eventService.list().subscribe((datas: Array<Event>) => {
@@ -83,7 +83,7 @@ export class CalendrierEventListComponent implements OnInit {
           meta: {
             projet: event.Projet
           }
-        })
+        });
       });
       this.isDataLoaded = true;
     });
@@ -96,13 +96,13 @@ export class CalendrierEventListComponent implements OnInit {
   openDialog(event: Event) {
     const dialogRef = this.dialog.open(CalendrierEventFormComponent);
 
-    dialogRef.componentInstance.onDataEvent(event)
+    dialogRef.componentInstance.onDataEvent(event);
 
     dialogRef.afterClosed().subscribe((result: Event) => {
       if (!result) {
-        return false
+        return false;
       }
-      this.snackBar.open('Portefeuille ' + result.titre + ' créé !', 'Effacer', { duration: 5000 });
+      this.snackBar.open('Évenement ' + result.titre + ' créé !', 'Ok', { duration: 5000 });
       this.loadData();
     });
   }
@@ -110,7 +110,7 @@ export class CalendrierEventListComponent implements OnInit {
   eventClicked({ event }: { event: CalendarEvent }): void {
     const dialogRef = this.dialog.open(CalendrierEventDetailsComponent);
 
-    dialogRef.componentInstance.onLoadEvent(Number(event.id))
+    dialogRef.componentInstance.onLoadEvent(Number(event.id));
   }
 
 }

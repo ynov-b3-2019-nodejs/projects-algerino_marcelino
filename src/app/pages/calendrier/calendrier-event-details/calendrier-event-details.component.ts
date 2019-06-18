@@ -12,14 +12,14 @@ import { CalendrierEventFormComponent } from '../calendrier-event-form/calendrie
 export class CalendrierEventDetailsComponent implements OnInit {
 
   isDataLoaded: boolean;
-  event: Event
-  constructor(private eventService: EventService, public dialog: MatDialog, private snackBar: MatSnackBar,) { }
+  event: Event;
+  constructor(private eventService: EventService, public dialog: MatDialog, private snackBar: MatSnackBar, ) { }
 
   ngOnInit() {
   }
 
   onLoadEvent(id: number) {
-    this.isDataLoaded = false
+    this.isDataLoaded = false;
 
     this.eventService.getById(id).subscribe((data: Event) => {
 
@@ -34,18 +34,18 @@ export class CalendrierEventDetailsComponent implements OnInit {
   openDialog(event: Event) {
     const dialogRef = this.dialog.open(CalendrierEventFormComponent);
 
-    dialogRef.componentInstance.onDataEvent(event)
+    dialogRef.componentInstance.onDataEvent(event);
 
     dialogRef.afterClosed().subscribe((result: Event) => {
       if (!result) {
-        return false
+        return false;
       }
-      this.snackBar.open('Événement modifié !', 'Effacer', { duration: 5000 });
+      this.snackBar.open('Événement modifié !', 'Ok', { duration: 5000 });
       this.dialog.closeAll();
     });
   }
 
-  delete(id: number){
-    this.eventService.delete(id)
+  delete(id: number) {
+    this.eventService.delete(id);
   }
 }

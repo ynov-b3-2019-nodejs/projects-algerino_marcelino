@@ -44,7 +44,7 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: Boolean) => {
       if (result) {
         this.userService.delete(element.id).subscribe(data => {
-          this.snackBar.open('Utilisateur ' + element.fullname + ' supprimé !', 'Effacer', {duration: 5000});
+          this.snackBar.open('Utilisateur ' + element.fullname + ' supprimé !', 'Ok', {duration: 5000});
           this.loadData();
         });
       }
@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('result : ', result);
-      this.snackBar.open('Utilisateur ' + result.fullname + ' ' + (element ? 'modifié' : 'créé') + ' !', 'Effacer', {duration: 5000});
+      this.snackBar.open('Utilisateur ' + result.fullname + ' ' + (element ? 'modifié' : 'créé') + ' !', 'Ok', {duration: 5000});
       this.loadData();
     });
   }
