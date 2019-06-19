@@ -1,3 +1,4 @@
+import { CalendarSocketService } from './../../../sockets/calendar-socket.service';
 import { CalendrierEventDetailsComponent } from './../calendrier-event-details/calendrier-event-details.component';
 import { Event } from './../../../models/event';
 import { EventService } from './../../../services/event.service';
@@ -57,9 +58,10 @@ export class CalendrierEventListComponent implements OnInit {
   isDataLoaded: boolean;
   refresh: Subject<any> = new Subject();
 
-  constructor(private snackBar: MatSnackBar, @Inject(DOCUMENT) private document, private eventService: EventService, public dialog: MatDialog) { }
+  constructor(private snackBar: MatSnackBar, @Inject(DOCUMENT) private document, private eventService: EventService, public dialog: MatDialog, private socketCalendar: CalendarSocketService) { }
 
   ngOnInit(): void {
+    this.socketCalendar.AddCalendarChangeEvent((messageJSON) => { this.loadData() });
     this.loadData();
     this.document.body.classList.add(this.darkThemeClass);
 

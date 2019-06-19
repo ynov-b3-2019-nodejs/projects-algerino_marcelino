@@ -11,6 +11,7 @@ import {
 } from 'date-fns';
 
 import { DatePipe } from '@angular/common';
+import { CalendarSocketService } from '../../../sockets/calendar-socket.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class CalendrierEventFormComponent implements OnInit {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TableListPortefeuilleComponent>,
     private datePipe: DatePipe,
+    private socketCalendar: CalendarSocketService,
     @Inject(MAT_DIALOG_DATA) data) {
 
     this.projetService.list(null, 0, 2000000).subscribe((datas: [Projet]) => {
@@ -100,6 +102,7 @@ export class CalendrierEventFormComponent implements OnInit {
           this.eventForm.controls.projetId.value)).subscribe(data => {
           this.dialogRef.close(data);
         });
+        this.socketCalendar.SendCalendarChangeEvent();
       }
       if (this.action === 'edit') {
         this.eventService.update(new Event(
@@ -110,6 +113,8 @@ export class CalendrierEventFormComponent implements OnInit {
           this.eventForm.controls.id.value)).subscribe(data => {
           this.dialogRef.close(data);
         });
+
+        this.socketCalendar.SendCalendarChangeEvent();
       }
     }
   }
